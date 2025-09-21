@@ -6,82 +6,52 @@
 
 ---
 
-## 📖 Descripción
+## 📖 Descripción  
 
-Este proyecto fue desarrollado para **optimizar el control de productos y procesos logísticos** en **DistriOchoa**, una distribuidora de frutas, verduras y alimentos.  
-Su objetivo es reemplazar los registros manuales y verbales por un sistema automatizado, confiable y eficiente que apoye las áreas de logística y operaciones:contentReference[oaicite:0]{index=0}.
+El **Sistema de Gestión de Inventario DistriOchoa** optimiza el control de productos, ventas, devoluciones y usuarios en una distribuidora de alimentos.  
+Basado en **Node.js** (backend) y **React** (frontend), automatiza procesos que antes eran verbales y propensos a errores, mejorando la logística y la toma de decisiones.  
 
 ---
 
-## 🚀 Características Principales
+## 🧭 Contexto y Justificación  
 
-- 🔐 **Autenticación y Roles Seguros:** Administración de usuarios (`Administrador`, `Auxiliar`) con permisos diferenciados.  
-- 📥 **Entradas de Productos:** Registro de abastecimientos y proveedores.  
-- 📤 **Salidas/Ventas:** Actualización automática del stock al registrar ventas.  
-- 🔄 **Devoluciones:** Control y ajuste de stock por devoluciones de clientes o proveedores.  
+DistriOchoa carecía de un sistema organizado para registrar entradas y salidas de mercancía, lo que generaba errores y retrasos. Con este proyecto:  
+- ✅ Se garantiza un manejo organizado y preciso del inventario.  
+- ✅ Se minimizan errores manuales.  
+- ✅ Se mejora la visibilidad de stock para planificar compras y reabastecimiento.  
+
+---
+
+## 🚀 Características Principales  
+
+- 🔐 **Autenticación Segura:** Uso de **tokens JWT**, **encriptación de contraseñas con hash** (bcrypt) y validaciones estrictas.  
+- 👥 **Gestión de Roles:**  
+  - **SuperAdmin:** ÚNICO rol que puede eliminar o crear administradores.  
+  - **Administrador:** Puede registrar nuevos usuarios (excepto SuperAdmins) y gestionar inventario.  
+  - **Auxiliar:** Puede registrar entradas, salidas y devoluciones, pero sin permisos de administración.  
+- 📥 **Entradas de Productos:** Registro de abastecimientos con control automático de stock.  
+- 📤 **Ventas y Salidas:** Descuento automático del inventario y asignación de responsables.  
+- 🔄 **Devoluciones:** Registro de devoluciones de clientes o proveedores con actualización automática del stock.  
 - 📦 **Inventario en Tiempo Real:** Alertas por bajo/exceso de stock y productos próximos a caducar.  
-- 📈 **Reportes y Métricas:** Productos más vendidos, historial de movimientos y reportes filtrados.  
-- 🧾 **Historial Completo:** Consultas de entradas, salidas y devoluciones por producto o fecha.  
-- 🎨 **Interfaz Moderna y Responsiva:** Construida con React, HTML5, CSS3 y diseño adaptable.  
+- 📈 **Reportes y Métricas:** Generación de informes de productos más vendidos, historial de movimientos y devoluciones.  
+- 🧾 **Historial Completo:** Consultas de entradas, salidas y devoluciones por fecha, producto o usuario.  
+- 🎨 **Interfaz Moderna y Responsiva:** Construida con React, HTML5 y CSS3.  
 
 ---
 
-## 🧭 Contexto del Proyecto  
+## 🗄️ Modelo Relacional  
 
-DistriOchoa enfrentaba problemas al manejar el inventario de forma verbal, lo que generaba errores, pérdida de tiempo y mala planificación:contentReference[oaicite:1]{index=1}.  
-Este sistema:  
-- ✅ Reduce el riesgo de desabastecimiento o exceso de productos.  
-- ✅ Agiliza la toma de decisiones logísticas.  
-- ✅ Mejora la comunicación interna y con proveedores.  
+El sistema está organizado en módulos:  
+- **Gestión de Inventario:** Tablas `Productos`, `Categorias`, `Proveedores`, `Entradas`.  
+- **Gestión de Ventas:** Tablas `Venta`, `DetalleVenta`.  
+- **Gestión de Devoluciones:** Tablas `Devoluciones`, `TipoDevolucion`.  
+- **Gestión de Usuarios:** Tablas `Persona`, `Roles`, `Tipo_Documento`.  
 
----
+🔗 Relaciones destacadas:  
+- `Productos` pertenece a una `Categoria` y puede tener múltiples `Entradas` y `Devoluciones`.  
+- `Entradas` y `Ventas` se asocian a `Persona` para identificar al responsable.  
+- `Roles` define los permisos de cada usuario (SuperAdmin, Administrador, Auxiliar).  
 
-## 🎯 Objetivos  
 
-### **Objetivo General**  
-Desarrollar un sistema de información para DistriOchoa que permita gestionar inventario, usuarios, ventas y devoluciones de forma segura y eficiente:contentReference[oaicite:2]{index=2}.
-
-### **Objetivos Específicos**  
-- Registrar, actualizar y eliminar productos.  
-- Controlar stock, entradas y salidas con alertas automáticas.  
-- Gestionar usuarios, roles y permisos.  
-- Registrar ventas asociadas a usuarios responsables.  
-- Generar reportes para apoyar decisiones operativas.  
-
----
-
-## 🛠️ Tecnologías Utilizadas  
-
-| Área          | Tecnología                 |
-|----------------|--------------------------|
-| **Frontend**   | React, JavaScript, HTML5, CSS3 |
-| **Backend**    | Node.js                   |
-| **Control de Versiones** | Git + GitHub    |
-
----
-
-## 📌 Alcance  
-
-- ✔ Soporta las áreas de **logística y operaciones**, enfocado en registro, control y seguimiento de inventario.  
-- ❌ No incluye módulos de atención al cliente ni facturación avanzada:contentReference[oaicite:3]{index=3}.  
-
----
-
-## 🧑‍💻 Contribuidores  
-
-- Valentina Hoyos Montalvo  
-- Katalina Jissell Antequera Gil  
-- Teylor Acosta Soto  
-- Windy Patricia Lozano Wilchez  
-
----
-
-## 📜 Licencia  
-
-Este proyecto está bajo la licencia **MIT**. Consulta el archivo `LICENSE` para más detalles.
-
----
-
-> 💡 **Nota:** Para instalar y usar este proyecto localmente, clona el repositorio y configura tu entorno Node.js y React. Puedes añadir una sección **Instalación** detallada (por ejemplo: `npm install`, `npm start`) si deseas guiar a otros contribuyentes.
 
 
