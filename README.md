@@ -1,7 +1,7 @@
 # 📦 Sistema de Gestión de Inventario – DistriOchoa 🧃
 
-![Banner del proyecto](https://img.shields.io/badge/Estado-Activo-brightgreen)  
-![Tecnologías](https://img.shields.io/badge/Tech-Laravel%20%7C%20Bootstrap%20%7C%20MySQL-blue)  
+![Estado](https://img.shields.io/badge/Estado-Activo-brightgreen)  
+![Tecnologías](https://img.shields.io/badge/Tech-Node.js%20%7C%20React%20%7C%20JS%20%7C%20HTML5%20%7C%20CSS3-blue)  
 ![Licencia](https://img.shields.io/badge/Licencia-MIT-yellow)
 
 ---
@@ -20,15 +20,15 @@ Su objetivo es reemplazar los registros manuales y verbales por un sistema autom
 - 📤 **Salidas/Ventas:** Actualización automática del stock al registrar ventas.  
 - 🔄 **Devoluciones:** Control y ajuste de stock por devoluciones de clientes o proveedores.  
 - 📦 **Inventario en Tiempo Real:** Alertas por bajo/exceso de stock y productos próximos a caducar.  
-- 📈 **Reportes y Métricas:** Productos más vendidos, historial de movimientos, y reportes filtrados.  
+- 📈 **Reportes y Métricas:** Productos más vendidos, historial de movimientos y reportes filtrados.  
 - 🧾 **Historial Completo:** Consultas de entradas, salidas y devoluciones por producto o fecha.  
-- 🎨 **Interfaz Moderna y Responsiva:** Bootstrap + CSS personalizado.  
+- 🎨 **Interfaz Moderna y Responsiva:** Construida con React, HTML5, CSS3 y diseño adaptable.  
 
 ---
 
 ## 🧭 Contexto del Proyecto  
 
-DistriOchoa enfrentaba problemas al manejar el inventario de forma verbal, lo que generaba errores, pérdida de tiempo y una mala planificación:contentReference[oaicite:1]{index=1}.  
+DistriOchoa enfrentaba problemas al manejar el inventario de forma verbal, lo que generaba errores, pérdida de tiempo y mala planificación:contentReference[oaicite:1]{index=1}.  
 Este sistema:  
 - ✅ Reduce el riesgo de desabastecimiento o exceso de productos.  
 - ✅ Agiliza la toma de decisiones logísticas.  
@@ -52,12 +52,11 @@ Desarrollar un sistema de información para DistriOchoa que permita gestionar in
 
 ## 🛠️ Tecnologías Utilizadas  
 
-| Área       | Tecnología       |
-|-------------|-----------------|
-| **Frontend**| HTML5, CSS3, Bootstrap, JavaScript |
-| **Backend** | PHP / Laravel    |
-| **Base de Datos** | MySQL      |
-| **Control de Versiones** | Git + GitHub |
+| Área          | Tecnología                 |
+|----------------|--------------------------|
+| **Frontend**   | React, JavaScript, HTML5, CSS3 |
+| **Backend**    | Node.js                   |
+| **Control de Versiones** | Git + GitHub    |
 
 ---
 
@@ -83,5 +82,6 @@ Este proyecto está bajo la licencia **MIT**. Consulta el archivo `LICENSE` para
 
 ---
 
+> 💡 **Nota:** Para instalar y usar este proyecto localmente, clona el repositorio y configura tu entorno Node.js y React. Puedes añadir una sección **Instalación** detallada (por ejemplo: `npm install`, `npm start`) si deseas guiar a otros contribuyentes.
 
 
