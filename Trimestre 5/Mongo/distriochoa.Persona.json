@@ -1,0 +1,110 @@
+[{
+  "_id": {
+    "$oid": "689ecd380749f4c4bbeec4ae"
+  },
+  "idPersona": 1,
+  "nombre": "Laura Mendoza",
+  "correo": "laura1@distriochoa.com",
+  "Contrasena": "clave1",
+  "Tipo_Documento_idTipo_Documento": 1,
+  "Rol_idRol": 1
+},
+{
+  "_id": {
+    "$oid": "689ecd380749f4c4bbeec4af"
+  },
+  "idPersona": 2,
+  "nombre": "Carlos Ruiz",
+  "correo": "carlos2@distriochoa.com",
+  "Contrasena": "clave2",
+  "Tipo_Documento_idTipo_Documento": 1,
+  "Rol_idRol": 2
+},
+{
+  "_id": {
+    "$oid": "689ecd380749f4c4bbeec4b0"
+  },
+  "idPersona": 3,
+  "nombre": "Ana Torres",
+  "correo": "ana3@distriochoa.com",
+  "Contrasena": "clave3",
+  "Tipo_Documento_idTipo_Documento": 2,
+  "Rol_idRol": 2
+},
+{
+  "_id": {
+    "$oid": "689ecd380749f4c4bbeec4b1"
+  },
+  "idPersona": 4,
+  "nombre": "Santiago Díaz",
+  "correo": "santiago4@distriochoa.com",
+  "Contrasena": "clave4",
+  "Tipo_Documento_idTipo_Documento": 1,
+  "Rol_idRol": 1
+},
+{
+  "_id": {
+    "$oid": "689ecd380749f4c4bbeec4b2"
+  },
+  "idPersona": 5,
+  "nombre": "Marta Rojas",
+  "correo": "marta5@distriochoa.com",
+  "Contrasena": "clave5",
+  "Tipo_Documento_idTipo_Documento": 2,
+  "Rol_idRol": 2
+},
+{
+  "_id": {
+    "$oid": "689ecd380749f4c4bbeec4b3"
+  },
+  "idPersona": 6,
+  "nombre": "Camilo Ramírez",
+  "correo": "camilo6@distriochoa.com",
+  "Contrasena": "clave6",
+  "Tipo_Documento_idTipo_Documento": 1,
+  "Rol_idRol": 2
+},
+{
+  "_id": {
+    "$oid": "689ecd380749f4c4bbeec4b4"
+  },
+  "idPersona": 7,
+  "nombre": "Andrea López",
+  "correo": "andrea7@distriochoa.com",
+  "Contrasena": "clave7",
+  "Tipo_Documento_idTipo_Documento": 1,
+  "Rol_idRol": 2
+},
+{
+  "_id": {
+    "$oid": "689ecd380749f4c4bbeec4b5"
+  },
+  "idPersona": 8,
+  "nombre": "Juan Ochoa",
+  "correo": "juan8@distriochoa.com",
+  "Contrasena": "clave8",
+  "Tipo_Documento_idTipo_Documento": 1,
+  "Rol_idRol": 1
+},
+{
+  "_id": {
+    "$oid": "689ecd380749f4c4bbeec4b6"
+  },
+  "idPersona": 9,
+  "nombre": "Tatiana Herrera",
+  "correo": "tatiana9@distriochoa.com",
+  "Contrasena": "clave9",
+  "Tipo_Documento_idTipo_Documento": 2,
+  "Rol_idRol": 2
+},
+{
+  "_id": {
+    "$oid": "689ecd380749f4c4bbeec4b7"
+  },
+  "idPersona": 10,
+  "nombre": "Esteban Pérez",
+  "correo": "esteban10@distriochoa.com",
+  "Contrasena": "clave10",
+  "Tipo_Documento_idTipo_Documento": 1,
+  "Rol_idRol": 2
+}]
