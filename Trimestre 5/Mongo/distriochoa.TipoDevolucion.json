@@ -1,0 +1,14 @@
+[{
+  "_id": {
+    "$oid": "689ed39217840a036beec5ec"
+  },
+  "idTipoDevolucion": 1,
+  "nombreTipo": "Cliente"
+},
+{
+  "_id": {
+    "$oid": "689ed39217840a036beec5ed"
+  },
+  "idTipoDevolucion": 2,
+  "nombreTipo": "Proveedor"
+}]
