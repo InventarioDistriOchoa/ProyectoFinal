@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "689ed7a5a5af5ac836eec4b3"
+  },
+  "idCategoria": 1,
+  "Nombre_Categoria": "Frutas",
+  "descripcion": "Frutas frescas de la región"
+},
+{
+  "_id": {
+    "$oid": "689ed7a5a5af5ac836eec4b4"
+  },
+  "idCategoria": 2,
+  "Nombre_Categoria": "Verduras",
+  "descripcion": "Verduras de hojas y raíces"
+},
+{
+  "_id": {
+    "$oid": "689ed7a5a5af5ac836eec4b5"
+  },
+  "idCategoria": 3,
+  "Nombre_Categoria": "Tubérculos",
+  "descripcion": "Tubérculos comestibles"
+},
+{
+  "_id": {
+    "$oid": "689ed7a5a5af5ac836eec4b6"
+  },
+  "idCategoria": 4,
+  "Nombre_Categoria": "Legumbres",
+  "descripcion": "Granos secos y cocidos"
+},
+{
+  "_id": {
+    "$oid": "689ed7a5a5af5ac836eec4b7"
+  },
+  "idCategoria": 5,
+  "Nombre_Categoria": "Hierbas Aromáticas",
+  "descripcion": "Hierbas para cocina y té"
+}]
