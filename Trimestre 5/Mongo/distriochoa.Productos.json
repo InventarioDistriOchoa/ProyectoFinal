@@ -1,0 +1,1200 @@
+[{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4c0"
+  },
+  "idProducto": 1,
+  "nombre": "Manzana Roja",
+  "precio": 1200,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4c1"
+  },
+  "idProducto": 2,
+  "nombre": "Pera Verde",
+  "precio": 1500,
+  "cantidad_Actual": 40,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4c2"
+  },
+  "idProducto": 3,
+  "nombre": "Banano",
+  "precio": 800,
+  "cantidad_Actual": 100,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4c3"
+  },
+  "idProducto": 4,
+  "nombre": "Papaya",
+  "precio": 2000,
+  "cantidad_Actual": 30,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4c4"
+  },
+  "idProducto": 5,
+  "nombre": "Mango Tommy",
+  "precio": 1800,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4c5"
+  },
+  "idProducto": 6,
+  "nombre": "Fresa",
+  "precio": 2500,
+  "cantidad_Actual": 20,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4c6"
+  },
+  "idProducto": 7,
+  "nombre": "Piña",
+  "precio": 2200,
+  "cantidad_Actual": 25,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4c7"
+  },
+  "idProducto": 8,
+  "nombre": "Uva Verde",
+  "precio": 3000,
+  "cantidad_Actual": 40,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4c8"
+  },
+  "idProducto": 9,
+  "nombre": "Melón",
+  "precio": 1800,
+  "cantidad_Actual": 15,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4c9"
+  },
+  "idProducto": 10,
+  "nombre": "Sandía",
+  "precio": 2200,
+  "cantidad_Actual": 10,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4ca"
+  },
+  "idProducto": 11,
+  "nombre": "Zanahoria",
+  "precio": 1000,
+  "cantidad_Actual": 70,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4cb"
+  },
+  "idProducto": 12,
+  "nombre": "Cebolla Cabezona",
+  "precio": 1300,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4cc"
+  },
+  "idProducto": 13,
+  "nombre": "Lechuga Batavia",
+  "precio": 900,
+  "cantidad_Actual": 40,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4cd"
+  },
+  "idProducto": 14,
+  "nombre": "Tomate Chonto",
+  "precio": 1100,
+  "cantidad_Actual": 80,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4ce"
+  },
+  "idProducto": 15,
+  "nombre": "Brócoli",
+  "precio": 2500,
+  "cantidad_Actual": 30,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4cf"
+  },
+  "idProducto": 16,
+  "nombre": "Coliflor",
+  "precio": 2400,
+  "cantidad_Actual": 25,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4d0"
+  },
+  "idProducto": 17,
+  "nombre": "Pepino Cohombro",
+  "precio": 1000,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4d1"
+  },
+  "idProducto": 18,
+  "nombre": "Acelga",
+  "precio": 1200,
+  "cantidad_Actual": 35,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4d2"
+  },
+  "idProducto": 19,
+  "nombre": "Espinaca",
+  "precio": 1300,
+  "cantidad_Actual": 45,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4d3"
+  },
+  "idProducto": 20,
+  "nombre": "Remolacha",
+  "precio": 1400,
+  "cantidad_Actual": 20,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4d4"
+  },
+  "idProducto": 21,
+  "nombre": "Papa Criolla",
+  "precio": 1600,
+  "cantidad_Actual": 100,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4d5"
+  },
+  "idProducto": 22,
+  "nombre": "Papa Pastusa",
+  "precio": 1500,
+  "cantidad_Actual": 90,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4d6"
+  },
+  "idProducto": 23,
+  "nombre": "Papa R-12",
+  "precio": 1400,
+  "cantidad_Actual": 80,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4d7"
+  },
+  "idProducto": 24,
+  "nombre": "Yuca",
+  "precio": 1200,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4d8"
+  },
+  "idProducto": 25,
+  "nombre": "Ñame",
+  "precio": 1100,
+  "cantidad_Actual": 40,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4d9"
+  },
+  "idProducto": 26,
+  "nombre": "Arracacha",
+  "precio": 1300,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4da"
+  },
+  "idProducto": 27,
+  "nombre": "Papa Salentuna",
+  "precio": 1700,
+  "cantidad_Actual": 45,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4db"
+  },
+  "idProducto": 28,
+  "nombre": "Papa Capira",
+  "precio": 1600,
+  "cantidad_Actual": 30,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4dc"
+  },
+  "idProducto": 29,
+  "nombre": "Papa Criolla Pequeña",
+  "precio": 1500,
+  "cantidad_Actual": 25,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4dd"
+  },
+  "idProducto": 30,
+  "nombre": "Yuca Amarilla",
+  "precio": 1400,
+  "cantidad_Actual": 35,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4de"
+  },
+  "idProducto": 31,
+  "nombre": "Frijol Bola Roja",
+  "precio": 4500,
+  "cantidad_Actual": 20,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4df"
+  },
+  "idProducto": 32,
+  "nombre": "Frijol Verde",
+  "precio": 4300,
+  "cantidad_Actual": 15,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4e0"
+  },
+  "idProducto": 33,
+  "nombre": "Lenteja",
+  "precio": 3900,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4e1"
+  },
+  "idProducto": 34,
+  "nombre": "Garbanzo",
+  "precio": 4100,
+  "cantidad_Actual": 25,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4e2"
+  },
+  "idProducto": 35,
+  "nombre": "Arveja Verde",
+  "precio": 4200,
+  "cantidad_Actual": 35,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4e3"
+  },
+  "idProducto": 36,
+  "nombre": "Frijol Cargamanto",
+  "precio": 4600,
+  "cantidad_Actual": 20,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4e4"
+  },
+  "idProducto": 37,
+  "nombre": "Haba Verde",
+  "precio": 4400,
+  "cantidad_Actual": 15,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4e5"
+  },
+  "idProducto": 38,
+  "nombre": "Frijol Blanco",
+  "precio": 4000,
+  "cantidad_Actual": 18,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4e6"
+  },
+  "idProducto": 39,
+  "nombre": "Frijol Negro",
+  "precio": 4200,
+  "cantidad_Actual": 20,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4e7"
+  },
+  "idProducto": 40,
+  "nombre": "Frijol Rosado",
+  "precio": 4300,
+  "cantidad_Actual": 22,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4e8"
+  },
+  "idProducto": 41,
+  "nombre": "Cilantro",
+  "precio": 800,
+  "cantidad_Actual": 80,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4e9"
+  },
+  "idProducto": 42,
+  "nombre": "Perejil",
+  "precio": 850,
+  "cantidad_Actual": 75,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4ea"
+  },
+  "idProducto": 43,
+  "nombre": "Hierbabuena",
+  "precio": 900,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4eb"
+  },
+  "idProducto": 44,
+  "nombre": "Ruda",
+  "precio": 1000,
+  "cantidad_Actual": 40,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4ec"
+  },
+  "idProducto": 45,
+  "nombre": "Albahaca",
+  "precio": 950,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4ed"
+  },
+  "idProducto": 46,
+  "nombre": "Apio",
+  "precio": 1100,
+  "cantidad_Actual": 55,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4ee"
+  },
+  "idProducto": 47,
+  "nombre": "Laurel",
+  "precio": 1200,
+  "cantidad_Actual": 30,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4ef"
+  },
+  "idProducto": 48,
+  "nombre": "Tomillo",
+  "precio": 1300,
+  "cantidad_Actual": 35,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4f0"
+  },
+  "idProducto": 49,
+  "nombre": "Orégano",
+  "precio": 1100,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4f1"
+  },
+  "idProducto": 50,
+  "nombre": "Romero",
+  "precio": 1200,
+  "cantidad_Actual": 45,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4f2"
+  },
+  "idProducto": 51,
+  "nombre": "Aguacate Hass",
+  "precio": 2500,
+  "cantidad_Actual": 40,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4f3"
+  },
+  "idProducto": 52,
+  "nombre": "Lulo",
+  "precio": 1800,
+  "cantidad_Actual": 30,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4f4"
+  },
+  "idProducto": 53,
+  "nombre": "Guayaba",
+  "precio": 1900,
+  "cantidad_Actual": 35,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4f5"
+  },
+  "idProducto": 54,
+  "nombre": "Mandarina",
+  "precio": 2000,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4f6"
+  },
+  "idProducto": 55,
+  "nombre": "Limón Tahití",
+  "precio": 1700,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4f7"
+  },
+  "idProducto": 56,
+  "nombre": "Naranja Valencia",
+  "precio": 2100,
+  "cantidad_Actual": 70,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4f8"
+  },
+  "idProducto": 57,
+  "nombre": "Zapallo",
+  "precio": 1500,
+  "cantidad_Actual": 45,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4f9"
+  },
+  "idProducto": 58,
+  "nombre": "Berenjena",
+  "precio": 1600,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4fa"
+  },
+  "idProducto": 59,
+  "nombre": "Calabacín",
+  "precio": 1550,
+  "cantidad_Actual": 55,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed17a17840a036beec4fb"
+  },
+  "idProducto": 60,
+  "nombre": "Repollo Verde",
+  "precio": 1400,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4a9"
+  },
+  "idProducto": 1,
+  "nombre": "Manzana Roja",
+  "precio": 1200,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4aa"
+  },
+  "idProducto": 2,
+  "nombre": "Pera Verde",
+  "precio": 1500,
+  "cantidad_Actual": 40,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4ab"
+  },
+  "idProducto": 3,
+  "nombre": "Banano",
+  "precio": 800,
+  "cantidad_Actual": 100,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4ac"
+  },
+  "idProducto": 4,
+  "nombre": "Papaya",
+  "precio": 2000,
+  "cantidad_Actual": 30,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4ad"
+  },
+  "idProducto": 5,
+  "nombre": "Mango Tommy",
+  "precio": 1800,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4ae"
+  },
+  "idProducto": 6,
+  "nombre": "Fresa",
+  "precio": 2500,
+  "cantidad_Actual": 20,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4af"
+  },
+  "idProducto": 7,
+  "nombre": "Piña",
+  "precio": 2200,
+  "cantidad_Actual": 25,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4b0"
+  },
+  "idProducto": 8,
+  "nombre": "Uva Verde",
+  "precio": 3000,
+  "cantidad_Actual": 40,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4b1"
+  },
+  "idProducto": 9,
+  "nombre": "Melón",
+  "precio": 1800,
+  "cantidad_Actual": 15,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4b2"
+  },
+  "idProducto": 10,
+  "nombre": "Sandía",
+  "precio": 2200,
+  "cantidad_Actual": 10,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4b3"
+  },
+  "idProducto": 11,
+  "nombre": "Zanahoria",
+  "precio": 1000,
+  "cantidad_Actual": 70,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4b4"
+  },
+  "idProducto": 12,
+  "nombre": "Cebolla Cabezona",
+  "precio": 1300,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4b5"
+  },
+  "idProducto": 13,
+  "nombre": "Lechuga Batavia",
+  "precio": 900,
+  "cantidad_Actual": 40,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4b6"
+  },
+  "idProducto": 14,
+  "nombre": "Tomate Chonto",
+  "precio": 1100,
+  "cantidad_Actual": 80,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4b7"
+  },
+  "idProducto": 15,
+  "nombre": "Brócoli",
+  "precio": 2500,
+  "cantidad_Actual": 30,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4b8"
+  },
+  "idProducto": 16,
+  "nombre": "Coliflor",
+  "precio": 2400,
+  "cantidad_Actual": 25,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4b9"
+  },
+  "idProducto": 17,
+  "nombre": "Pepino Cohombro",
+  "precio": 1000,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4ba"
+  },
+  "idProducto": 18,
+  "nombre": "Acelga",
+  "precio": 1200,
+  "cantidad_Actual": 35,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4bb"
+  },
+  "idProducto": 19,
+  "nombre": "Espinaca",
+  "precio": 1300,
+  "cantidad_Actual": 45,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4bc"
+  },
+  "idProducto": 20,
+  "nombre": "Remolacha",
+  "precio": 1400,
+  "cantidad_Actual": 20,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4bd"
+  },
+  "idProducto": 21,
+  "nombre": "Papa Criolla",
+  "precio": 1600,
+  "cantidad_Actual": 100,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4be"
+  },
+  "idProducto": 22,
+  "nombre": "Papa Pastusa",
+  "precio": 1500,
+  "cantidad_Actual": 90,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4bf"
+  },
+  "idProducto": 23,
+  "nombre": "Papa R-12",
+  "precio": 1400,
+  "cantidad_Actual": 80,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4c0"
+  },
+  "idProducto": 24,
+  "nombre": "Yuca",
+  "precio": 1200,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4c1"
+  },
+  "idProducto": 25,
+  "nombre": "Ñame",
+  "precio": 1100,
+  "cantidad_Actual": 40,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4c2"
+  },
+  "idProducto": 26,
+  "nombre": "Arracacha",
+  "precio": 1300,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4c3"
+  },
+  "idProducto": 27,
+  "nombre": "Papa Salentuna",
+  "precio": 1700,
+  "cantidad_Actual": 45,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4c4"
+  },
+  "idProducto": 28,
+  "nombre": "Papa Capira",
+  "precio": 1600,
+  "cantidad_Actual": 30,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4c5"
+  },
+  "idProducto": 29,
+  "nombre": "Papa Criolla Pequeña",
+  "precio": 1500,
+  "cantidad_Actual": 25,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4c6"
+  },
+  "idProducto": 30,
+  "nombre": "Yuca Amarilla",
+  "precio": 1400,
+  "cantidad_Actual": 35,
+  "Categoria_idCategoria": 3
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4c7"
+  },
+  "idProducto": 31,
+  "nombre": "Frijol Bola Roja",
+  "precio": 4500,
+  "cantidad_Actual": 20,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4c8"
+  },
+  "idProducto": 32,
+  "nombre": "Frijol Verde",
+  "precio": 4300,
+  "cantidad_Actual": 15,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4c9"
+  },
+  "idProducto": 33,
+  "nombre": "Lenteja",
+  "precio": 3900,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4ca"
+  },
+  "idProducto": 34,
+  "nombre": "Garbanzo",
+  "precio": 4100,
+  "cantidad_Actual": 25,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4cb"
+  },
+  "idProducto": 35,
+  "nombre": "Arveja Verde",
+  "precio": 4200,
+  "cantidad_Actual": 35,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4cc"
+  },
+  "idProducto": 36,
+  "nombre": "Frijol Cargamanto",
+  "precio": 4600,
+  "cantidad_Actual": 20,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4cd"
+  },
+  "idProducto": 37,
+  "nombre": "Haba Verde",
+  "precio": 4400,
+  "cantidad_Actual": 15,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4ce"
+  },
+  "idProducto": 38,
+  "nombre": "Frijol Blanco",
+  "precio": 4000,
+  "cantidad_Actual": 18,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4cf"
+  },
+  "idProducto": 39,
+  "nombre": "Frijol Negro",
+  "precio": 4200,
+  "cantidad_Actual": 20,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4d0"
+  },
+  "idProducto": 40,
+  "nombre": "Frijol Rosado",
+  "precio": 4300,
+  "cantidad_Actual": 22,
+  "Categoria_idCategoria": 4
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4d1"
+  },
+  "idProducto": 41,
+  "nombre": "Cilantro",
+  "precio": 800,
+  "cantidad_Actual": 80,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4d2"
+  },
+  "idProducto": 42,
+  "nombre": "Perejil",
+  "precio": 850,
+  "cantidad_Actual": 75,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4d3"
+  },
+  "idProducto": 43,
+  "nombre": "Hierbabuena",
+  "precio": 900,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4d4"
+  },
+  "idProducto": 44,
+  "nombre": "Ruda",
+  "precio": 1000,
+  "cantidad_Actual": 40,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4d5"
+  },
+  "idProducto": 45,
+  "nombre": "Albahaca",
+  "precio": 950,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4d6"
+  },
+  "idProducto": 46,
+  "nombre": "Apio",
+  "precio": 1100,
+  "cantidad_Actual": 55,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4d7"
+  },
+  "idProducto": 47,
+  "nombre": "Laurel",
+  "precio": 1200,
+  "cantidad_Actual": 30,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4d8"
+  },
+  "idProducto": 48,
+  "nombre": "Tomillo",
+  "precio": 1300,
+  "cantidad_Actual": 35,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4d9"
+  },
+  "idProducto": 49,
+  "nombre": "Orégano",
+  "precio": 1100,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4da"
+  },
+  "idProducto": 50,
+  "nombre": "Romero",
+  "precio": 1200,
+  "cantidad_Actual": 45,
+  "Categoria_idCategoria": 5
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4db"
+  },
+  "idProducto": 51,
+  "nombre": "Aguacate Hass",
+  "precio": 2500,
+  "cantidad_Actual": 40,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4dc"
+  },
+  "idProducto": 52,
+  "nombre": "Lulo",
+  "precio": 1800,
+  "cantidad_Actual": 30,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4dd"
+  },
+  "idProducto": 53,
+  "nombre": "Guayaba",
+  "precio": 1900,
+  "cantidad_Actual": 35,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4de"
+  },
+  "idProducto": 54,
+  "nombre": "Mandarina",
+  "precio": 2000,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4df"
+  },
+  "idProducto": 55,
+  "nombre": "Limón Tahití",
+  "precio": 1700,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4e0"
+  },
+  "idProducto": 56,
+  "nombre": "Naranja Valencia",
+  "precio": 2100,
+  "cantidad_Actual": 70,
+  "Categoria_idCategoria": 1
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4e1"
+  },
+  "idProducto": 57,
+  "nombre": "Zapallo",
+  "precio": 1500,
+  "cantidad_Actual": 45,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4e2"
+  },
+  "idProducto": 58,
+  "nombre": "Berenjena",
+  "precio": 1600,
+  "cantidad_Actual": 50,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4e3"
+  },
+  "idProducto": 59,
+  "nombre": "Calabacín",
+  "precio": 1550,
+  "cantidad_Actual": 55,
+  "Categoria_idCategoria": 2
+},
+{
+  "_id": {
+    "$oid": "689ed541462677a5f1eec4e4"
+  },
+  "idProducto": 60,
+  "nombre": "Repollo Verde",
+  "precio": 1400,
+  "cantidad_Actual": 60,
+  "Categoria_idCategoria": 2
+}]

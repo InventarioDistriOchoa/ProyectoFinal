@@ -1,0 +1,160 @@
+[{
+  "_id": {
+    "$oid": "689ed47717840a036beec62a"
+  },
+  "idDevolucion": 1,
+  "fecha": {
+    "$date": "2024-05-10T00:00:00.000Z"
+  },
+  "motivo": "Producto dañado",
+  "cantidad": "2",
+  "Producto_idProducto": 1,
+  "Persona_idPersona": 1,
+  "Persona_Tipo_Documento_idTipo_Documento": 1,
+  "Persona_Rol_idRol": 1,
+  "TipoDevolucion_idTipoDevolucion": 1
+},
+{
+  "_id": {
+    "$oid": "689ed47717840a036beec62b"
+  },
+  "idDevolucion": 2,
+  "fecha": {
+    "$date": "2024-05-11T00:00:00.000Z"
+  },
+  "motivo": "Vencido",
+  "cantidad": "1",
+  "Producto_idProducto": 2,
+  "Persona_idPersona": 2,
+  "Persona_Tipo_Documento_idTipo_Documento": 1,
+  "Persona_Rol_idRol": 2,
+  "TipoDevolucion_idTipoDevolucion": 2
+},
+{
+  "_id": {
+    "$oid": "689ed47717840a036beec62c"
+  },
+  "idDevolucion": 3,
+  "fecha": {
+    "$date": "2024-05-12T00:00:00.000Z"
+  },
+  "motivo": "Error en entrega",
+  "cantidad": "3",
+  "Producto_idProducto": 3,
+  "Persona_idPersona": 3,
+  "Persona_Tipo_Documento_idTipo_Documento": 2,
+  "Persona_Rol_idRol": 2,
+  "TipoDevolucion_idTipoDevolucion": 1
+},
+{
+  "_id": {
+    "$oid": "689ed47717840a036beec62d"
+  },
+  "idDevolucion": 4,
+  "fecha": {
+    "$date": "2024-05-13T00:00:00.000Z"
+  },
+  "motivo": "Producto dañado",
+  "cantidad": "2",
+  "Producto_idProducto": 4,
+  "Persona_idPersona": 4,
+  "Persona_Tipo_Documento_idTipo_Documento": 1,
+  "Persona_Rol_idRol": 1,
+  "TipoDevolucion_idTipoDevolucion": 2
+},
+{
+  "_id": {
+    "$oid": "689ed47717840a036beec62e"
+  },
+  "idDevolucion": 5,
+  "fecha": {
+    "$date": "2024-05-14T00:00:00.000Z"
+  },
+  "motivo": "Vencido",
+  "cantidad": "1",
+  "Producto_idProducto": 5,
+  "Persona_idPersona": 5,
+  "Persona_Tipo_Documento_idTipo_Documento": 2,
+  "Persona_Rol_idRol": 2,
+  "TipoDevolucion_idTipoDevolucion": 1
+},
+{
+  "_id": {
+    "$oid": "689ed47717840a036beec62f"
+  },
+  "idDevolucion": 6,
+  "fecha": {
+    "$date": "2024-05-15T00:00:00.000Z"
+  },
+  "motivo": "Producto dañado",
+  "cantidad": "2",
+  "Producto_idProducto": 6,
+  "Persona_idPersona": 6,
+  "Persona_Tipo_Documento_idTipo_Documento": 1,
+  "Persona_Rol_idRol": 2,
+  "TipoDevolucion_idTipoDevolucion": 2
+},
+{
+  "_id": {
+    "$oid": "689ed47717840a036beec630"
+  },
+  "idDevolucion": 7,
+  "fecha": {
+    "$date": "2024-05-16T00:00:00.000Z"
+  },
+  "motivo": "Error en entrega",
+  "cantidad": "2",
+  "Producto_idProducto": 7,
+  "Persona_idPersona": 7,
+  "Persona_Tipo_Documento_idTipo_Documento": 1,
+  "Persona_Rol_idRol": 2,
+  "TipoDevolucion_idTipoDevolucion": 1
+},
+{
+  "_id": {
+    "$oid": "689ed47717840a036beec631"
+  },
+  "idDevolucion": 8,
+  "fecha": {
+    "$date": "2024-05-17T00:00:00.000Z"
+  },
+  "motivo": "Producto dañado",
+  "cantidad": "1",
+  "Producto_idProducto": 8,
+  "Persona_idPersona": 8,
+  "Persona_Tipo_Documento_idTipo_Documento": 1,
+  "Persona_Rol_idRol": 1,
+  "TipoDevolucion_idTipoDevolucion": 2
+},
+{
+  "_id": {
+    "$oid": "689ed47717840a036beec632"
+  },
+  "idDevolucion": 9,
+  "fecha": {
+    "$date": "2024-05-18T00:00:00.000Z"
+  },
+  "motivo": "Vencido",
+  "cantidad": "1",
+  "Producto_idProducto": 9,
+  "Persona_idPersona": 9,
+  "Persona_Tipo_Documento_idTipo_Documento": 2,
+  "Persona_Rol_idRol": 2,
+  "TipoDevolucion_idTipoDevolucion": 1
+},
+{
+  "_id": {
+    "$oid": "689ed47717840a036beec633"
+  },
+  "idDevolucion": 10,
+  "fecha": {
+    "$date": "2024-05-19T00:00:00.000Z"
+  },
+  "motivo": "Error en entrega",
+  "cantidad": "3",
+  "Producto_idProducto": 10,
+  "Persona_idPersona": 10,
+  "Persona_Tipo_Documento_idTipo_Documento": 1,
+  "Persona_Rol_idRol": 2,
+  "TipoDevolucion_idTipoDevolucion": 1
+}]
