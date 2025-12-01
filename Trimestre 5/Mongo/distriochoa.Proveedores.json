@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "689ecd470749f4c4bbeec4b8"
+  },
+  "idProveedor": 1,
+  "Nombre_Empresa": "AgroFrutas S.A.S",
+  "Direccion": "Cra 10 #12-34"
+},
+{
+  "_id": {
+    "$oid": "689ecd470749f4c4bbeec4b9"
+  },
+  "idProveedor": 2,
+  "Nombre_Empresa": "Verduras del Campo",
+  "Direccion": "Calle 8 #45-67"
+},
+{
+  "_id": {
+    "$oid": "689ecd470749f4c4bbeec4ba"
+  },
+  "idProveedor": 3,
+  "Nombre_Empresa": "Frutas Tropicales",
+  "Direccion": "Av 30 #9-99"
+},
+{
+  "_id": {
+    "$oid": "689ecd470749f4c4bbeec4bb"
+  },
+  "idProveedor": 4,
+  "Nombre_Empresa": "Frescampo Ltda",
+  "Direccion": "Calle 55 #78-12"
+},
+{
+  "_id": {
+    "$oid": "689ecd470749f4c4bbeec4bc"
+  },
+  "idProveedor": 5,
+  "Nombre_Empresa": "Natural Fresh",
+  "Direccion": "Cra 33 #21-56"
+},
+{
+  "_id": {
+    "$oid": "689ecd470749f4c4bbeec4bd"
+  },
+  "idProveedor": 6,
+  "Nombre_Empresa": "La Huerta",
+  "Direccion": "Calle 40 #60-80"
+},
+{
+  "_id": {
+    "$oid": "689ecd470749f4c4bbeec4be"
+  },
+  "idProveedor": 7,
+  "Nombre_Empresa": "EcoFrutas",
+  "Direccion": "Av 7 #70-10"
+},
+{
+  "_id": {
+    "$oid": "689ecd470749f4c4bbeec4bf"
+  },
+  "idProveedor": 8,
+  "Nombre_Empresa": "VerdeVida",
+  "Direccion": "Transv 18 #5-45"
+},
+{
+  "_id": {
+    "$oid": "689ecd470749f4c4bbeec4c0"
+  },
+  "idProveedor": 9,
+  "Nombre_Empresa": "Delicias Naturales",
+  "Direccion": "Calle 3 #13-20"
+},
+{
+  "_id": {
+    "$oid": "689ecd470749f4c4bbeec4c1"
+  },
+  "idProveedor": 10,
+  "Nombre_Empresa": "Campo Limpio",
+  "Direccion": "Carrera 24 #17-60"
+}]
