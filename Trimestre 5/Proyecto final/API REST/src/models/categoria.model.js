@@ -1,3 +1,4 @@
+// models/categoria.model.js
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/connect.db.js";
 
@@ -21,11 +22,17 @@ Categoria.init(
       allowNull: false,
       field: "Descripcion",
     },
+    Estado: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+      field: "Estado",
+    },
   },
   {
     sequelize,
     modelName: "Categoria",
-    tableName: "categorias",   // 👈 en minúsculas, como está en MariaDB
+    tableName: "categorias", // como la tienes en la BD
     timestamps: false,
   }
 );

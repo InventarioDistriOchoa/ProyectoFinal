@@ -1,68 +1,95 @@
 // middlewares/role.middleware.js
-import Persona from '../models/persona.model.js';
-import Rol from '../models/rol.model.js';
+import Persona from "../models/persona.model.js";
+import Rol from "../models/rol.model.js";
 
-// Definimos permisos por rol (acciones de negocio)
+// Permisos por rol (USAMOS CLAVES EN MINÚSCULAS)
 const permisos = {
-  SuperAdmin: {
+  superadmin: {
     gestionarUsuarios: true,
-    eliminar: ["Admin", "Auxiliar", "SuperAdmin"], // puede eliminar cualquiera
+    eliminar: ["admin", "auxiliar", "superadmin"],
   },
-  Admin: {
+  admin: {
     gestionarUsuarios: true,
-    eliminar: ["Auxiliar"], // no puede eliminar otro Admin ni SuperAdmin
+    eliminar: ["auxiliar"],
   },
-  Auxiliar: {
-    gestionarUsuarios: false, // no puede gestionar usuarios
-    eliminar: [], // no puede eliminar
+  auxiliar: {
+    gestionarUsuarios: false,
+    eliminar: [],
   },
 };
 
 const checkRole = (rolesOrAccion = null) => {
   return async (req, res, next) => {
     try {
-      // Validar que el usuario esté logueado
+      // 1) Validar que haya userId cargado desde el token
       if (!req.userId) {
-        return res.status(401).json({ ok: false, status: 401, Message: "Token no encontrado o inválido" });
+        return res.status(401).json({
+          ok: false,
+          status: 401,
+          Message: "Token no encontrado o inválido",
+        });
       }
 
-      // Obtener usuario y rol desde la base de datos
+      // 2) Buscar persona y rol
       const persona = await Persona.findOne({
         where: { idPersona: req.userId },
         include: { model: Rol, attributes: ["Descripcion_Rol"] },
       });
 
       if (!persona) {
-        return res.status(404).json({ ok: false, status: 404, Message: "Usuario no encontrado" });
+        return res.status(404).json({
+          ok: false,
+          status: 404,
+          Message: "Usuario no encontrado",
+        });
       }
 
-      const rolName = persona.Rol.Descripcion_Rol;
-      req.userRolName = rolName;
+      // 3) Normalizar nombre de rol a minúsculas
+      let rolName = (persona.Rol.Descripcion_Rol || "").trim().toLowerCase();
 
-      // PERMISO ESPECIAL: permitir que un usuario edite su propio perfil
-   if (req.params.id && Number(req.params.id) === Number(req.userId)) {
-  return next();
-}
+      // Normalizaciones típicas
+      if (rolName.includes("super")) rolName = "superadmin";
+      else if (rolName.includes("admin")) rolName = "admin";
+      else if (rolName.includes("aux")) rolName = "auxiliar";
 
+      req.userRolName = rolName; // lo guardamos en la request para otros usos
 
+      // 🔍 Logs de depuración
+      console.log("🟢 Rol detectado del usuario:", rolName);
+      console.log("🟡 Roles permitidos en esta ruta:", rolesOrAccion);
 
-      // Validación de roles (Array de roles permitidos)
+      // 4) Permitir que un usuario edite su propio perfil
+      if (req.params.id && Number(req.params.id) === Number(req.userId)) {
+        return next();
+      }
+
+      // 5) Si la ruta recibe un array de roles permitidos
       if (Array.isArray(rolesOrAccion)) {
-        if (!rolesOrAccion.includes(rolName)) {
-          return res.status(403).json({ ok: false, status: 403, Message: "No tienes permisos para esta acción" });
+        const rolesLower = rolesOrAccion.map((r) => r.toLowerCase());
+        if (!rolesLower.includes(rolName)) {
+          return res.status(403).json({
+            ok: false,
+            status: 403,
+            Message: "No tienes permisos para esta acción",
+          });
         }
-      } 
-      // Validación de acción específica (string)
+      }
+      // 6) Si la ruta recibe un string de acción (ej: "gestionarUsuarios")
       else if (typeof rolesOrAccion === "string") {
-        const rolPermisos = permisos[rolName];
-        if (!rolPermisos || !rolPermisos[rolesOrAccion]) {
-          return res.status(403).json({ ok: false, status: 403, Message: "No tienes permisos para esta acción" });
+        const permisosRol = permisos[rolName]; // usamos rol en minúsculas
+        if (!permisosRol || !permisosRol[rolesOrAccion]) {
+          return res.status(403).json({
+            ok: false,
+            status: 403,
+            Message: "No tienes permisos para esta acción",
+          });
         }
       }
 
-      // Pasar al siguiente middleware / controlador
+      // 7) Todo OK, continuar
       next();
     } catch (err) {
+      console.error("❌ Error en checkRole:", err);
       return res.status(500).json({
         ok: false,
         status: 500,

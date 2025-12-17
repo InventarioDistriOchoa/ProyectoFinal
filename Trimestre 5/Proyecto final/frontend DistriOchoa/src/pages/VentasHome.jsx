@@ -76,18 +76,18 @@ export default function VentasHome() {
     const mostrarModuloUsuarios = rol === "admin" || rol === "superadmin";
     return [
       { label: "Inicio", icon: <BiHome />, action: () => navigate("/dashboard") },
-    { label: "Productos", icon: <BiFile />, action: () => navigate("/lista-productos") },
-    { label: "Entradas", icon: <BiFile />, action: () => navigate("/lista-entradas") },
-    { label: "Ventas", icon: <BiFile />, action: () => navigate("/ventas") },
-    { label: "Devoluciones", icon: <BiUndo />, action: () => navigate("/devoluciones") },
-    { label: "Categorías", icon: <BiCategory />, action: () => navigate("/categorias") },
-    { label: "Stock", icon: <BiBox />, action: () => navigate("/stock") },
-    { label: "Reportes", icon: <BiLineChart />, action: () => navigate("/reportes") },
-    ...(mostrarModuloUsuarios
-      ? [{ label: "Usuarios", icon: <BiUser />, action: () => navigate("/usuarios") }]
-      : []),
-    { label: "Mi Perfil", icon: <BiUser />, action: () => navigate("/my-profile") },
-    { label: "Salir", icon: <BiLogOut />, action: cerrarSesion },
+      { label: "Productos", icon: <BiFile />, action: () => navigate("/lista-productos") },
+      { label: "Entradas", icon: <BiFile />, action: () => navigate("/lista-entradas") },
+      { label: "Ventas", icon: <BiFile />, action: () => navigate("/ventas") },
+      { label: "Devoluciones", icon: <BiUndo />, action: () => navigate("/devoluciones") },
+      { label: "Categorías", icon: <BiCategory />, action: () => navigate("/categorias") },
+      { label: "Stock", icon: <BiBox />, action: () => navigate("/stock") },
+      { label: "Reportes", icon: <BiLineChart />, action: () => navigate("/reportes") },
+      ...(mostrarModuloUsuarios
+        ? [{ label: "Usuarios", icon: <BiUser />, action: () => navigate("/usuarios") }]
+        : []),
+      { label: "Mi Perfil", icon: <BiUser />, action: () => navigate("/my-profile") },
+      { label: "Salir", icon: <BiLogOut />, action: cerrarSesion },
     ];
   }, [rol, navigate]);
 
@@ -149,9 +149,15 @@ export default function VentasHome() {
       </button>
 
       {/* Header */}
-      <header className="dashboard-header-top d-flex justify-content-between align-items-center px-4 py-2" style={{ background: "transparent" }}>
+      <header
+        className="dashboard-header-top d-flex justify-content-between align-items-center px-4 py-2"
+        style={{ background: "transparent" }}
+      >
         <div className="text-center flex-grow-1">
-          <div className="fw-bold" style={{ fontSize: "2rem", color: "#198754" }}>
+          <div
+            className="fw-bold"
+            style={{ fontSize: "2.2rem", color: "#198754" }}
+          >
             🛒 Módulo Ventas
           </div>
           <div className="usuario-header mt-1">
@@ -170,21 +176,37 @@ export default function VentasHome() {
               src={`http://localhost:3001${foto}`}
               alt="Perfil"
               className="rounded-circle"
-              style={{ width: "40px", height: "40px", objectFit: "cover", border: "2px solid #198754" }}
+              style={{
+                width: "44px",
+                height: "44px",
+                objectFit: "cover",
+                border: "2px solid #198754",
+              }}
             />
           </button>
-          <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="perfilDropdown">
+          <ul
+            className="dropdown-menu dropdown-menu-end"
+            aria-labelledby="perfilDropdown"
+          >
             <li>
-              <button className="dropdown-item" onClick={() => navigate("/my-profile")}>
+              <button
+                className="dropdown-item"
+                onClick={() => navigate("/my-profile")}
+              >
                 Mi Perfil
               </button>
             </li>
             <li>
-              <button className="dropdown-item" onClick={() => navigate("/dashboard")}>
+              <button
+                className="dropdown-item"
+                onClick={() => navigate("/dashboard")}
+              >
                 Volver al Inicio
               </button>
             </li>
-            <li><hr className="dropdown-divider" /></li>
+            <li>
+              <hr className="dropdown-divider" />
+            </li>
             <li>
               <button className="dropdown-item" onClick={cerrarSesion}>
                 Cerrar sesión
@@ -196,29 +218,78 @@ export default function VentasHome() {
 
       {/* Contenido principal */}
       <main className="dashboard py-4 flex-grow-1">
-        <div className="fila-opciones justify-content-center">
+        <div
+          className="fila-opciones d-flex justify-content-center flex-wrap"
+          style={{ gap: "2.5rem", marginTop: "1.5rem" }}
+        >
           <div
             className="opcion tarjeta-dashboard"
             onClick={() => navigate("/registro-venta")}
+            style={{
+              width: "260px",
+              minHeight: "220px",
+              padding: "1.7rem 1.4rem",
+              borderRadius: "22px",
+              boxShadow: "0 10px 24px rgba(0,0,0,0.08)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              backgroundColor: "rgba(255,255,255,0.96)",
+            }}
           >
             <img
               src="/img/icon-venta.png"
               alt="Registrar Venta"
-              style={{ width: "80px", height: "80px" }}
+              style={{ width: "100px", height: "100px", marginBottom: "0.7rem" }}
             />
-            <p>Registrar Venta</p>
+            <p
+              style={{
+                fontSize: "1.15rem",
+                fontWeight: "600",
+                color: "#198754",
+                margin: 0,
+                textAlign: "center",
+              }}
+            >
+              Registrar Venta
+            </p>
           </div>
 
           <div
             className="opcion tarjeta-dashboard"
             onClick={() => navigate("/registro-detalle-venta")}
+            style={{
+              width: "260px",
+              minHeight: "220px",
+              padding: "1.7rem 1.4rem",
+              borderRadius: "22px",
+              boxShadow: "0 10px 24px rgba(0,0,0,0.08)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              backgroundColor: "rgba(255,255,255,0.96)",
+            }}
           >
             <img
               src="/img/icon-detalle-venta.png"
-              alt="Registrar Detalle Venta"
-              style={{ width: "80px", height: "80px" }}
+              alt="Detalle de las ventas"
+              style={{ width: "100px", height: "100px", marginBottom: "0.7rem" }}
             />
-            <p>Registrar Detalle Venta</p>
+            <p
+              style={{
+                fontSize: "1.15rem",
+                fontWeight: "600",
+                color: "#198754",
+                margin: 0,
+                textAlign: "center",
+              }}
+            >
+              Detalle de las ventas
+            </p>
           </div>
         </div>
       </main>

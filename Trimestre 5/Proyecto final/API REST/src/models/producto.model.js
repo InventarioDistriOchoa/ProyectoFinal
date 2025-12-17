@@ -30,21 +30,26 @@ Producto.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "categorias",    // 👈 minúsculas
+        model: "categorias",
         key: "idCategoria",
       },
+    },
+    Estado: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
     },
   },
   {
     sequelize,
     modelName: "Producto",
-    tableName: "productos",     // 👈 minúsculas
+    tableName: "productos",
     timestamps: false,
   }
 );
 
-// Relaciones
-Producto.belongsTo(Categoria, { foreignKey: "Categoria_id", as: "Categoria"    });
-Categoria.hasMany(Producto, { foreignKey: "Categoria_id" });
+// ❌ AQUÍ YA NO DEFINIMOS RELACIONES
+// Producto.belongsTo(...)
+// Categoria.hasMany(...)
 
 export default Producto;

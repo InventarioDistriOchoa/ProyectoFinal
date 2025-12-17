@@ -1,3 +1,4 @@
+// models/tipoDevolucion.model.js
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/connect.db.js";
 
@@ -14,6 +15,11 @@ TipoDevolucion.init(
       type: DataTypes.STRING(45),
       allowNull: false,
       unique: true,
+    },
+    Estado: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
     },
   },
   {

@@ -1,4 +1,3 @@
-// src/schemas/persona.schema.js
 import Joi from "@hapi/joi";
 
 export default {

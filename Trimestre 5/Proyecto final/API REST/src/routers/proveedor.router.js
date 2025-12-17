@@ -1,3 +1,4 @@
+// routers/proveedor.router.js
 import { Router } from "express";
 import {
   createProveedor,
@@ -5,6 +6,7 @@ import {
   showIdProveedor,
   updateProveedor,
   deleteProveedor,
+  activarProveedor,        // 👈 NUEVO
 } from "../controllers/proveedor.controller.js";
 
 import validate from "../middlewares/validate.middleware.js";
@@ -34,11 +36,20 @@ router.put(
   updateProveedor
 );
 
+// Desactivar (soft delete)
 router.delete(
   "/proveedor/:id",
   verifyToken,
   checkRole(["Admin", "SuperAdmin"]),
   deleteProveedor
+);
+
+// ✅ Activar proveedor nuevamente
+router.put(
+  "/proveedor/activar/:id",
+  verifyToken,
+  checkRole(["Admin", "SuperAdmin"]),
+  activarProveedor
 );
 
 export default router;

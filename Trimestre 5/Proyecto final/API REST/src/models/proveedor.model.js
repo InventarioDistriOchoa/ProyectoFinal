@@ -18,6 +18,11 @@ Proveedor.init(
       type: DataTypes.STRING(100),
       allowNull: false,
     },
+    Estado: {
+      type: DataTypes.BOOLEAN,     // TINYINT(1) en MySQL
+      allowNull: false,
+      defaultValue: true,
+    },
   },
   {
     sequelize,

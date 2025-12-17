@@ -6,6 +6,7 @@ import {
   showIdDevolucion,
   updateDevolucion,
   deleteDevolucion,
+  activarDevolucion,   // 👈 NUEVO
 } from "../controllers/devolucion.controller.js";
 
 import validate from "../middlewares/validate.middleware.js";
@@ -16,11 +17,6 @@ const router = Router();
 
 /**
  * Rutas de Devolución
- * - POST: crea la devolución y, si es al proveedor,
- *         descuenta stock o elimina el producto (lógica en createDevolucion)
- * - GET:  lista o muestra por id
- * - PUT:  actualiza
- * - DELETE: elimina
  */
 
 // Crear devolución
@@ -28,10 +24,10 @@ router.post(
   "/devolucion",
   verifyToken,
   validate(schemaDevolucion.createDevolucion),
-  createDevolucion       // <── aquí dentro va la lógica de stock
+  createDevolucion
 );
 
-// Listar todas
+// Listar todas (solo activas si lo pones así en el controller)
 router.get("/devolucion", verifyToken, showDevolucion);
 
 // Obtener por id
@@ -45,7 +41,14 @@ router.put(
   updateDevolucion
 );
 
-// Eliminar
+// Desactivar (soft delete → Estado = 0)
 router.delete("/devolucion/:id", verifyToken, deleteDevolucion);
+
+// ✅ ACTIVAR devolución (Estado = 1)
+router.put(
+  "/devolucion/activar/:id",
+  verifyToken,
+  activarDevolucion
+);
 
 export default router;

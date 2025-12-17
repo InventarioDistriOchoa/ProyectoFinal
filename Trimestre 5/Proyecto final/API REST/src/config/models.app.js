@@ -23,8 +23,17 @@ Rol.hasMany(Persona, { foreignKey: "Rol_id" });
 Persona.belongsTo(Rol, { foreignKey: "Rol_id" });
 
 // Producto con Categoria
-Categoria.hasMany(Producto, { foreignKey: "Categoria_id" });
-Producto.belongsTo(Categoria, { foreignKey: "Categoria_id" });
+// Producto con Categoria
+Categoria.hasMany(Producto, {
+  foreignKey: "Categoria_id",
+  as: "productos",      // 👈 alias del lado de Categoria
+});
+
+Producto.belongsTo(Categoria, {
+  foreignKey: "Categoria_id",
+  as: "categoria",      // 👈 alias del lado de Producto
+});
+
 
 // Entrada con Producto, Proveedor y Persona
 Producto.hasMany(Entrada, { foreignKey: "Producto_id" });

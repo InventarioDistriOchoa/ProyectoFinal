@@ -45,6 +45,13 @@ Entrada.init(
         key: "idPersona",
       },
     },
+
+    // 👇 NUEVO: para soft delete
+    Estado: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
   },
   {
     sequelize,

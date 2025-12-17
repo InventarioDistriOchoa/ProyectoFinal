@@ -1,3 +1,4 @@
+// models/tipoDocumento.model.js
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/connect.db.js";
 
@@ -14,6 +15,11 @@ TipoDocumento.init(
       type: DataTypes.STRING(30),
       allowNull: false,
       unique: true,
+    },
+    Estado: {
+      type: DataTypes.BOOLEAN,          // TINYINT(1) en MySQL
+      allowNull: false,
+      defaultValue: true,
     },
   },
   {

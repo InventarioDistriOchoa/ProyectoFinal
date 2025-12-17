@@ -15,81 +15,75 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!correo || !contrasena) {
+  if (!correo || !contrasena) {
+    Swal.fire({
+      icon: "warning",
+      title: "Ups... 🌱",
+      text: "Correo o contraseña requeridos",
+      confirmButtonColor: "#198754",
+    });
+    return;
+  }
+
+  try {
+    const res = await axios.post("http://localhost:3001/api/persona/login", {
+      Correo: correo,
+      Contrasena: contrasena,
+    });
+
+    if (res.data.ok) {
+      const rolBD = res.data.body.Rol;
+      const rolSeleccionado = localStorage.getItem("rol_seleccionado");
+
+      // ⛔ Seguridad: Rol no coincide → mensaje genérico
+      if (rolSeleccionado && rolSeleccionado.toLowerCase() !== rolBD.toLowerCase()) {
+        Swal.fire({
+          icon: "error",
+          title: "Datos incorrectos",
+          text: "Verifica tu información e inténtalo nuevamente.",
+          confirmButtonColor: "#198754",
+        }).then(() => {
+          localStorage.removeItem("rol_seleccionado");
+          navigate("/");
+        });
+        return;
+      }
+
+      // Guardar datos esenciales
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("nombre", res.data.body.Nombre);
+      localStorage.setItem("rol", rolBD);
+
       Swal.fire({
-        icon: "warning",
-        title: "Ups... 🌱",
-        text: "Correo o contraseña requeridos",
+        icon: "success",
+        title: "¡Bienvenido! 🎉",
+        text: `Hola ${res.data.body.Nombre}`,
+        confirmButtonColor: "#198754",
+      }).then(() => navigate("/dashboard"));
+
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Datos incorrectos",
+        text: "Verifica tu información e inténtalo nuevamente.",
         confirmButtonColor: "#198754",
       });
-      return;
     }
+  } catch (err) {
+    console.error(err);
 
-    try {
-      const res = await axios.post("http://localhost:3001/api/persona/login", {
-        Correo: correo,
-        Contrasena: contrasena,
-      });
+    // Siempre mensaje genérico (alta seguridad)
+    Swal.fire({
+      icon: "error",
+      title: "Datos incorrectos",
+      text: "Verifica tu información e inténtalo nuevamente.",
+      confirmButtonColor: "#198754",
+    });
+  }
+};
 
-      if (res.data.ok) {
-        const rolSeleccionado = localStorage.getItem("rol_seleccionado");
-        const rolBD = res.data.body.Rol;
-
-        // ✅ Comparación insensible a mayúsculas/minúsculas
-        if (rolSeleccionado && rolSeleccionado.toLowerCase() !== rolBD.toLowerCase()) {
-          Swal.fire({
-            icon: "error",
-            title: "Rol incorrecto",
-            text: `Seleccionaste "${rolSeleccionado}", pero este usuario es "${rolBD}".`,
-            confirmButtonColor: "#198754",
-          }).then(() => {
-            localStorage.removeItem("rol_seleccionado");
-            navigate("/");
-          });
-          return;
-        }
-
-        // Guardar datos
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("nombre", res.data.body.Nombre);
-        localStorage.setItem("rol", rolBD);
-
-        Swal.fire({
-          icon: "success",
-          title: "¡Bienvenido! 🎉",
-          text: `Hola ${res.data.body.Nombre}`,
-          confirmButtonColor: "#198754",
-        }).then(() => navigate("/dashboard"));
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: res.data.Message,
-          confirmButtonColor: "#198754",
-        });
-      }
-    } catch (err) {
-      console.error(err);
-      // Distinción entre usuario no registrado y contraseña incorrecta
-      if (err.response?.status === 401) {
-        Swal.fire({
-          icon: "error",
-          title: "Credenciales incorrectas",
-          text: err.response.data.Message || "Correo o contraseña incorrectos",
-          confirmButtonColor: "#198754",
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error de servidor",
-          text: "No se pudo iniciar sesión. Revisa que tu usuario esté registrado 😑.",
-          confirmButtonColor: "#198754",
-        });
-      }
-    }
-  };
 
   return (
     <div className="container-fluid min-vh-100 d-flex justify-content-center align-items-center p-3">

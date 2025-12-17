@@ -5,6 +5,7 @@ import {
   showIdEntrada,
   updateEntrada,
   deleteEntrada,
+  activarEntrada,   // 👈 NUEVO
 } from "../controllers/entrada.controller.js";
 
 import validate from "../middlewares/validate.middleware.js";
@@ -14,7 +15,9 @@ import checkRole from "../middlewares/role.middleware.js";
 
 const router = Router();
 
-// Solo Admin puede crear, actualizar y eliminar entradas
+// Solo Admin puede crear, actualizar y eliminar entradas (comentario tuyo)
+// Si quisieras forzar eso, aquí podrías meter checkRole([1,3])
+
 router.post(
   "/entrada",
   verifyToken,
@@ -32,10 +35,18 @@ router.put(
   updateEntrada
 );
 
+// Soft delete (Estado = false + actualiza stock)
 router.delete(
   "/entrada/:id",
   verifyToken,
   deleteEntrada
+);
+
+// 👇 NUEVO: activar entrada (Estado = true + vuelve a sumar stock)
+router.put(
+  "/entrada/:id/activar",
+  verifyToken,
+  activarEntrada
 );
 
 export default router;

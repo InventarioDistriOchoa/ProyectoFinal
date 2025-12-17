@@ -1,9 +1,55 @@
+// controllers/proveedor.controller.js
 import Proveedor from "../models/proveedor.model.js";
+import { registrarAuditoria } from "../utils/registrarAuditoria.js";
 
 // Crear proveedor
 export const createProveedor = async (req, res) => {
   try {
-    const proveedor = await Proveedor.create(req.body);
+    const { Nombre_Empresa } = req.body;
+
+    // Buscar proveedor por nombre (puedes ajustar criterio si quieres)
+    const existente = await Proveedor.findOne({
+      where: { Nombre_Empresa },
+    });
+
+    // ✅ Existe pero está desactivado → ofrecer reactivar desde el front
+    if (existente && existente.Estado === false) {
+      return res.status(409).json({
+        ok: false,
+        status: 409,
+        desactivado: true,
+        idProveedor: existente.idProveedor,
+        message: "Este proveedor ya existe pero está desactivado. ¿Deseas reactivarlo?",
+      });
+    }
+
+    // ❌ Ya existe y está activo
+    if (existente) {
+      return res.status(409).json({
+        ok: false,
+        status: 409,
+        desactivado: false,
+        message: "El proveedor ya existe y está activo.",
+      });
+    }
+
+    // Crear nuevo proveedor
+    const proveedor = await Proveedor.create({
+      ...req.body,
+      Estado: true,
+    });
+
+    // Auditoría
+    await registrarAuditoria({
+      usuario: req.userId,
+      accion: "CREATE",
+      coleccion: "Proveedor",
+      documentoId: proveedor.idProveedor,
+      datosAnteriores: null,
+      datosNuevos: proveedor.toJSON(),
+      ip: req.ip,
+    });
+
     res.status(201).json({
       ok: true,
       status: 201,
@@ -11,6 +57,7 @@ export const createProveedor = async (req, res) => {
       body: proveedor,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({
       ok: false,
       status: 500,
@@ -20,10 +67,13 @@ export const createProveedor = async (req, res) => {
   }
 };
 
-// Mostrar todos los proveedores
+// Mostrar todos los proveedores (solo activos)
 export const showProveedor = async (req, res) => {
   try {
-    const proveedores = await Proveedor.findAll();
+    const proveedores = await Proveedor.findAll({
+      where: { Estado: true },
+    });
+
     res.status(200).json({
       ok: true,
       status: 200,
@@ -40,11 +90,13 @@ export const showProveedor = async (req, res) => {
   }
 };
 
-// Mostrar proveedor por ID
+// Mostrar proveedor por ID (puedes decidir si permitir ver inactivos o no)
 export const showIdProveedor = async (req, res) => {
   try {
     const { id } = req.params;
-    const proveedor = await Proveedor.findOne({ where: { idProveedor: id } });
+    const proveedor = await Proveedor.findOne({
+      where: { idProveedor: id },
+    });
 
     if (!proveedor)
       return res.status(404).json({
@@ -73,12 +125,37 @@ export const showIdProveedor = async (req, res) => {
 export const updateProveedor = async (req, res) => {
   try {
     const { id } = req.params;
-    await Proveedor.update(req.body, { where: { idProveedor: id } });
+    const proveedor = await Proveedor.findByPk(id);
+
+    if (!proveedor) {
+      return res.status(404).json({
+        ok: false,
+        status: 404,
+        Message: "Proveedor no encontrado",
+      });
+    }
+
+    const datosAnteriores = { ...proveedor.dataValues };
+
+    await proveedor.update(req.body);
+
+    const datosNuevos = { ...proveedor.dataValues };
+
+    await registrarAuditoria({
+      usuario: req.userId,
+      accion: "UPDATE",
+      coleccion: "Proveedor",
+      documentoId: id,
+      datosAnteriores,
+      datosNuevos,
+      ip: req.ip,
+    });
 
     res.status(200).json({
       ok: true,
       status: 200,
       Message: "Proveedor actualizado",
+      body: proveedor,
     });
   } catch (error) {
     res.status(500).json({
@@ -90,22 +167,90 @@ export const updateProveedor = async (req, res) => {
   }
 };
 
-// Eliminar proveedor
+// Desactivar proveedor (soft delete)
 export const deleteProveedor = async (req, res) => {
   try {
     const { id } = req.params;
-    await Proveedor.destroy({ where: { idProveedor: id } });
+
+    const proveedor = await Proveedor.findByPk(id);
+    if (!proveedor) {
+      return res.status(404).json({
+        ok: false,
+        status: 404,
+        Message: "Proveedor no encontrado",
+      });
+    }
+
+    const datosAnteriores = proveedor.toJSON();
+
+    await proveedor.update({ Estado: false });
+
+    await registrarAuditoria({
+      usuario: req.userId,
+      accion: "DELETE",
+      coleccion: "Proveedor",
+      documentoId: id,
+      datosAnteriores,
+      datosNuevos: { Estado: false },
+      ip: req.ip,
+    });
 
     res.status(200).json({
       ok: true,
       status: 200,
-      Message: "Proveedor eliminado",
+      Message: "Proveedor desactivado",
     });
   } catch (error) {
     res.status(500).json({
       ok: false,
       status: 500,
-      Message: "Error al eliminar proveedor",
+      Message: "Error al desactivar proveedor",
+      error: error.message,
+    });
+  }
+};
+
+// Activar proveedor
+export const activarProveedor = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const proveedor = await Proveedor.findByPk(id);
+    if (!proveedor) {
+      return res.status(404).json({
+        ok: false,
+        status: 404,
+        Message: "Proveedor no encontrado",
+      });
+    }
+
+    const datosAnteriores = { ...proveedor.dataValues };
+
+    await proveedor.update({ Estado: true });
+
+    const datosNuevos = { ...proveedor.dataValues };
+
+    await registrarAuditoria({
+      usuario: req.userId,
+      accion: "ACTIVATE",
+      coleccion: "Proveedor",
+      documentoId: id,
+      datosAnteriores,
+      datosNuevos,
+      ip: req.ip,
+    });
+
+    res.status(200).json({
+      ok: true,
+      status: 200,
+      Message: "Proveedor activado",
+      body: proveedor,
+    });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      status: 500,
+      Message: "Error al activar proveedor",
       error: error.message,
     });
   }

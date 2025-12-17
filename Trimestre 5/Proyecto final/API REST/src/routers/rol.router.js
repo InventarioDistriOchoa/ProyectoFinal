@@ -1,3 +1,4 @@
+// routers/rol.router.js
 import { Router } from "express";
 import {
   createRol,
@@ -5,6 +6,7 @@ import {
   showIdRol,
   updateRol,
   deleteRol,
+  activarRol,          // 👈 NUEVO
 } from "../controllers/rol.controller.js";
 
 import validate from "../middlewares/validate.middleware.js";
@@ -44,6 +46,7 @@ router.post("/rol", async (req, res, next) => {
     token = token.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWK_SECRET);
 
+    // Solo Admin (idRol = 1, según tu lógica) puede crear
     if (decoded.userRol !== 1) {
       return res.status(403).json({
         ok: false,
@@ -54,7 +57,6 @@ router.post("/rol", async (req, res, next) => {
 
     await schemaRol.createRol.validateAsync(req.body);
     return createRol(req, res);
-
   } catch (error) {
     console.error("Error en POST /rol:", error);
     if (error.name === "JsonWebTokenError") {
@@ -77,7 +79,7 @@ router.get("/rol/:id", verifyToken, showIdRol);
 router.put(
   "/rol/:id",
   verifyToken,
-  checkRole(["Admin"]),
+  checkRole(["Admin"]),              // solo Admin
   validate(schemaRol.updateRol),
   updateRol
 );
@@ -85,8 +87,16 @@ router.put(
 router.delete(
   "/rol/:id",
   verifyToken,
-  checkRole(["Admin"]),
+  checkRole(["Admin"]),              // soft delete
   deleteRol
+);
+
+// ✅ Activar rol
+router.put(
+  "/rol/activar/:id",
+  verifyToken,
+  checkRole(["Admin"]),              // solo Admin reactiva
+  activarRol
 );
 
 export default router;

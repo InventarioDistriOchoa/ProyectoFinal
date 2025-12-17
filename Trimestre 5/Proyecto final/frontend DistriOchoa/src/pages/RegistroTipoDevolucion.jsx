@@ -11,7 +11,7 @@ import {
   BiTrash,
   BiUndo,
   BiLineChart,
-  BiUser
+  BiUser,
 } from "react-icons/bi";
 import {
   useTable,
@@ -31,15 +31,21 @@ export default function RegistroTipoDevolucion() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [vista, setVista] = useState("registro");
 
-  // Datos
+  // Datos tabla
   const [tipos, setTipos] = useState([]);
 
-  // Formulario
+  // Formulario registro
   const [nombreTipo, setNombreTipo] = useState("");
 
   // Modal edición
   const [modalVisible, setModalVisible] = useState(false);
   const [tipoEdit, setTipoEdit] = useState(null);
+
+  const [rol, setRol] = useState("");
+
+  useEffect(() => {
+    setRol((localStorage.getItem("rol") || "").toLowerCase());
+  }, []);
 
   // ---- Cerrar sesión ----
   const cerrarSesion = async () => {
@@ -58,34 +64,25 @@ export default function RegistroTipoDevolucion() {
     }
   };
 
-
-  const [rol, setRol] = useState("");
-
-useEffect(() => {
-  setRol((localStorage.getItem("rol") || "").toLowerCase());
-}, []);
-
-
   const sidebarItems = useMemo(() => {
-   const mostrarModuloUsuarios = rol === "admin" || rol === "superadmin";
-   return [
-     { label: "Inicio", icon: <BiHome />, action: () => navigate("/dashboard") },
-     { label: "Productos", icon: <BiFile />, action: () => navigate("/lista-productos") },
-     { label: "Entradas", icon: <BiFile />, action: () => navigate("/lista-entradas") },
-     { label: "Ventas", icon: <BiFile />, action: () => navigate("/ventas") },
-     { label: "Devoluciones", icon: <BiUndo />, action: () => navigate("/devoluciones") },
-     { label: "Devolución", icon: <BiFile />, action: () => navigate("/registro-devolucion") }, // <-- Nuevo
-     { label: "Categorías", icon: <BiCategory />, action: () => navigate("/categorias") },
-     { label: "Stock", icon: <BiBox />, action: () => navigate("/stock") },
-     { label: "Reportes", icon: <BiLineChart />, action: () => navigate("/reportes") },
-     ...(mostrarModuloUsuarios
-       ? [{ label: "Usuarios", icon: <BiUser />, action: () => navigate("/usuarios") }]
-       : []),
-     { label: "Mi Perfil", icon: <BiUser />, action: () => navigate("/my-profile") },
-     { label: "Salir", icon: <BiLogOut />, action: cerrarSesion },
-   ];
-}, [rol, navigate]);
-
+    const mostrarModuloUsuarios = rol === "admin" || rol === "superadmin";
+    return [
+      { label: "Inicio", icon: <BiHome />, action: () => navigate("/dashboard") },
+      { label: "Productos", icon: <BiFile />, action: () => navigate("/lista-productos") },
+      { label: "Entradas", icon: <BiFile />, action: () => navigate("/lista-entradas") },
+      { label: "Ventas", icon: <BiFile />, action: () => navigate("/ventas") },
+      { label: "Devoluciones", icon: <BiUndo />, action: () => navigate("/devoluciones") },
+      { label: "Devolución", icon: <BiFile />, action: () => navigate("/registro-devolucion") },
+      { label: "Categorías", icon: <BiCategory />, action: () => navigate("/categorias") },
+      { label: "Stock", icon: <BiBox />, action: () => navigate("/stock") },
+      { label: "Reportes", icon: <BiLineChart />, action: () => navigate("/reportes") },
+      ...(mostrarModuloUsuarios
+        ? [{ label: "Usuarios", icon: <BiUser />, action: () => navigate("/usuarios") }]
+        : []),
+      { label: "Mi Perfil", icon: <BiUser />, action: () => navigate("/my-profile") },
+      { label: "Salir", icon: <BiLogOut />, action: cerrarSesion },
+    ];
+  }, [rol, navigate]);
 
   // ---- Sidebar toggle ----
   useEffect(() => {
@@ -98,15 +95,19 @@ useEffect(() => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [sidebarVisible]);
 
-  // ---- Cargar datos ----
+  // ---- Cargar tipos (solo activos) ----
   const fetchTipos = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/tipoDevolucion/tipoDevolucion", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        "http://localhost:3001/api/tipoDevolucion/tipoDevolucion",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       const data = await res.json();
       setTipos(data.body || []);
-    } catch {
+    } catch (err) {
+      console.error(err);
       Swal.fire("Error", "No se pudieron cargar los tipos de devolución", "error");
     }
   };
@@ -122,32 +123,85 @@ useEffect(() => {
   // ---- Registrar TipoDevolucion ----
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!nombreTipo.trim()) {
       return Swal.fire("Error", "El nombre es obligatorio", "warning");
     }
 
     try {
-      const res = await fetch("http://localhost:3001/api/tipoDevolucion/tipoDevolucion", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ NombreTipo: nombreTipo.trim() }),
-      });
+      const res = await fetch(
+        "http://localhost:3001/api/tipoDevolucion/tipoDevolucion",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ NombreTipo: nombreTipo.trim() }),
+        }
+      );
+
       const data = await res.json();
+
+      // 👉 CASO ESPECIAL: existe pero está desactivado (409 + desactivado=true)
+      if (res.status === 409 && data.desactivado) {
+        const result = await Swal.fire({
+          icon: "warning",
+          title: "Ya existe",
+          text: data.message,
+          showCancelButton: true,
+          confirmButtonText: "Reactivar",
+          cancelButtonText: "Cancelar",
+        });
+
+        if (result.isConfirmed) {
+          // 👉 Activar el tipo desactivado
+          const activar = await fetch(
+            `http://localhost:3001/api/tipoDevolucion/activar/${data.idTipoDevolucion}`,
+            {
+              method: "PUT",
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+
+          const actData = await activar.json();
+
+          if (activar.ok) {
+            Swal.fire(
+              "Activado",
+              "Tipo de devolución reactivado correctamente",
+              "success"
+            );
+            setNombreTipo("");
+            fetchTipos();
+          } else {
+            Swal.fire("Error", actData.Message || "No se pudo activar", "error");
+          }
+        }
+
+        return; // salimos del handleSubmit
+      }
+
+      // 👉 CASO NORMAL
       if (res.ok) {
         Swal.fire("Éxito", "Tipo de devolución creado", "success");
         setNombreTipo("");
         fetchTipos();
-      } else {
-        Swal.fire("Error", data.Message || "No se pudo registrar", "error");
+        return;
       }
-    } catch {
+
+      // 👉 Otros errores
+      Swal.fire("Error", data.Message || "No se pudo registrar", "error");
+    } catch (err) {
+      console.error(err);
       Swal.fire("Error", "No se pudo registrar", "error");
     }
   };
 
   // ---- Abrir modal edición ----
   const abrirModalEditar = (tipo) => {
-    setTipoEdit({ id: tipo.idTipoDevolucion, nombre: tipo.NombreTipo });
+    // 👈 tipo viene de row.original → { id, nombre }
+    setTipoEdit({ id: tipo.id, nombre: tipo.nombre });
     setModalVisible(true);
   };
 
@@ -156,16 +210,22 @@ useEffect(() => {
     if (!tipoEdit.nombre.trim()) {
       return Swal.fire("Error", "El nombre es obligatorio", "warning");
     }
+
     try {
       const res = await fetch(
         `http://localhost:3001/api/tipoDevolucion/tipoDevolucion/${tipoEdit.id}`,
         {
           method: "PUT",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
           body: JSON.stringify({ NombreTipo: tipoEdit.nombre.trim() }),
         }
       );
+
       const data = await res.json();
+
       if (res.ok) {
         Swal.fire("Éxito", "Tipo de devolución actualizado", "success");
         setModalVisible(false);
@@ -173,7 +233,8 @@ useEffect(() => {
       } else {
         Swal.fire("Error", data.Message || "No se pudo actualizar", "error");
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       Swal.fire("Error", "No se pudo actualizar", "error");
     }
   };
@@ -187,20 +248,27 @@ useEffect(() => {
       confirmButtonText: "Sí, eliminar",
       cancelButtonText: "Cancelar",
     });
+
     if (confirm.isConfirmed) {
       try {
         const res = await fetch(
           `http://localhost:3001/api/tipoDevolucion/tipoDevolucion/${id}`,
-          { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
+          {
+            method: "DELETE",
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
+
         const data = await res.json();
+
         if (res.ok) {
           Swal.fire("Eliminado", "Tipo de devolución eliminado", "success");
           fetchTipos();
         } else {
           Swal.fire("Error", data.Message || "No se pudo eliminar", "error");
         }
-      } catch {
+      } catch (err) {
+        console.error(err);
         Swal.fire("Error", "No se pudo eliminar", "error");
       }
     }
@@ -269,6 +337,7 @@ useEffect(() => {
 
   return (
     <div className="min-vh-100 position-relative bg-blur">
+      {/* Overlay */}
       {sidebarVisible && (
         <div
           className="position-fixed top-0 start-0 w-100 h-100"
@@ -276,42 +345,53 @@ useEffect(() => {
         />
       )}
 
-    {/* Sidebar */}
-<div
-  ref={sidebarRef}
-  className="position-fixed top-0 start-0 vh-100 bg-white shadow p-3 d-flex flex-column"
-  style={{
-    width: "240px",
-    transform: sidebarVisible ? "translateX(0)" : "translateX(-100%)",
-    transition: "transform 0.3s ease-in-out",
-    zIndex: 2000,
-  }}
-  onMouseLeave={() => setSidebarVisible(false)}
->
- {/* Contenedor scrollable */}
-<div
-  className="d-flex flex-column gap-3 sidebar-scroll"
-  style={{
-    flexGrow: 1,
-    overflowY: "auto",
-    paddingRight: "5px",
-  }}
->
-  {sidebarItems.map((item, index) => (
-    <button
-      key={index}
-      onClick={() => { item.action(); setSidebarVisible(false); }}
-      className="d-flex align-items-center gap-2 p-2 rounded shadow-sm border-0 bg-light text-dark"
-      style={{ cursor: "pointer", transition: "all 0.2s", marginTop: index === 0 ? "4rem" : "0" }}
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#e2f0ff")}
-      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#f8f9fa")}
-    >
-      {item.icon} <span>{item.label}</span>
-    </button>
-  ))}
-</div>
-</div>
+      {/* Sidebar */}
+      <div
+        ref={sidebarRef}
+        className="position-fixed top-0 start-0 vh-100 bg-white shadow p-3 d-flex flex-column"
+        style={{
+          width: "240px",
+          transform: sidebarVisible ? "translateX(0)" : "translateX(-100%)",
+          transition: "transform 0.3s ease-in-out",
+          zIndex: 2000,
+        }}
+        onMouseLeave={() => setSidebarVisible(false)}
+      >
+        <div
+          className="d-flex flex-column gap-3 sidebar-scroll"
+          style={{
+            flexGrow: 1,
+            overflowY: "auto",
+            paddingRight: "5px",
+          }}
+        >
+          {sidebarItems.map((item, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                item.action();
+                setSidebarVisible(false);
+              }}
+              className="d-flex align-items-center gap-2 p-2 rounded shadow-sm border-0 bg-light text-dark"
+              style={{
+                cursor: "pointer",
+                transition: "all 0.2s",
+                marginTop: index === 0 ? "4rem" : "0",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = "#e2f0ff")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = "#f8f9fa")
+              }
+            >
+              {item.icon} <span>{item.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
 
+      {/* Botón hamburguesa */}
       <button
         id="btn-toggle-sidebar"
         className="btn btn-light position-fixed top-3 start-3"
@@ -323,17 +403,23 @@ useEffect(() => {
 
       {/* Contenido principal */}
       <div className="container px-3 pt-5">
-        <h4 className="text-center mb-4 fw-bold text-success">Tipo de Devolución</h4>
+        <h4 className="text-center mb-4 fw-bold text-success">
+          Tipo de Devolución
+        </h4>
 
         <div className="d-flex justify-content-center gap-2 mb-4">
           <button
-            className={`btn ${vista === "registro" ? "btn-success" : "btn-outline-success"}`}
+            className={`btn ${
+              vista === "registro" ? "btn-success" : "btn-outline-success"
+            }`}
             onClick={() => setVista("registro")}
           >
             Registro
           </button>
           <button
-            className={`btn ${vista === "listado" ? "btn-success" : "btn-outline-success"}`}
+            className={`btn ${
+              vista === "listado" ? "btn-success" : "btn-outline-success"
+            }`}
             onClick={() => setVista("listado")}
           >
             Listado
@@ -343,7 +429,10 @@ useEffect(() => {
         {/* ---------- VISTA REGISTRO ---------- */}
         {vista === "registro" && (
           <div className="d-flex justify-content-center">
-            <div className="card shadow-lg p-4 rounded-5" style={{ maxWidth: "500px", width: "100%" }}>
+            <div
+              className="card shadow-lg p-4 rounded-5"
+              style={{ maxWidth: "500px", width: "100%" }}
+            >
               <form onSubmit={handleSubmit} className="row g-3">
                 <div className="col-12">
                   <label className="form-label">Nombre del Tipo</label>
@@ -357,7 +446,10 @@ useEffect(() => {
                 </div>
 
                 <div className="col-12 d-flex justify-content-center mt-3">
-                  <button type="submit" className="btn btn-success btn-lg rounded-4 px-5 shadow-sm">
+                  <button
+                    type="submit"
+                    className="btn btn-success btn-lg rounded-4 px-5 shadow-sm"
+                  >
                     Registrar
                   </button>
                 </div>
@@ -377,14 +469,21 @@ useEffect(() => {
                 placeholder="Buscar tipo de devolución"
               />
             </div>
-            <table {...getTableProps()} className="table table-bordered table-hover shadow-sm">
+            <table
+              {...getTableProps()}
+              className="table table-bordered table-hover shadow-sm"
+            >
               <thead className="table-success">
                 {headerGroups.map((headerGroup) => (
                   <tr {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
                       <th
-                        {...column.getHeaderProps(column.getSortByToggleProps())}
-                        style={{ cursor: column.canSort ? "pointer" : "default" }}
+                        {...column.getHeaderProps(
+                          column.getSortByToggleProps()
+                        )}
+                        style={{
+                          cursor: column.canSort ? "pointer" : "default",
+                        }}
                       >
                         {column.render("Header")}
                         {column.canSort && (

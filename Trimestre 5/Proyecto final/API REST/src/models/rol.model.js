@@ -1,3 +1,4 @@
+// models/rol.model.js
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/connect.db.js";
 
@@ -14,6 +15,11 @@ Rol.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+    },
+    Estado: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,   // 👈 activo por defecto
     },
   },
   {

@@ -1,7 +1,6 @@
+// models/detalleVenta.model.js
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/connect.db.js";
-import Venta from "./venta.model.js";
-import Producto from "./producto.model.js";
 
 class DetalleVenta extends Model {}
 
@@ -27,18 +26,13 @@ DetalleVenta.init(
     Venta_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: Venta,
-        key: "idVenta",
-      },
+      // puedes agregar referencia si quieres
+      // references: { model: "Venta", key: "idVenta" },
     },
     Producto_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: Producto,
-        key: "idProducto",
-      },
+      // references: { model: "Producto", key: "idProducto" },
     },
   },
   {

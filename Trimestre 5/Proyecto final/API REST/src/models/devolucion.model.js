@@ -1,3 +1,4 @@
+// models/devolucion.model.js
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/connect.db.js";
 import Producto from "./producto.model.js";
@@ -48,6 +49,11 @@ Devolucion.init(
         model: TipoDevolucion,
         key: "idTipoDevolucion",
       },
+    },
+    Estado: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
     },
   },
   {

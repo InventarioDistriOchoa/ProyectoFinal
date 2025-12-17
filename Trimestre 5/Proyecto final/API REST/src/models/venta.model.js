@@ -1,6 +1,9 @@
+// models/venta.model.js
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/connect.db.js";
+
 import Persona from "./persona.model.js";
+import DetalleVenta from "./detalleVenta.model.js";
 
 class Venta extends Model {}
 
@@ -27,13 +30,33 @@ Venta.init(
         key: "idPersona",
       },
     },
+
+    // 👇 NUEVO: para poder hacer DELETE lógico + ACTIVATE
+    Estado: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true, // activa por defecto
+    },
   },
   {
     sequelize,
     modelName: "Venta",
     tableName: "Venta",
-    timestamps: false,
+    timestamps: false, // usas Fecha, no createdAt/updatedAt
   }
 );
+
+/* ============================
+   🔗 RELACIONES
+   ============================ */
+Venta.belongsTo(Persona, {
+  foreignKey: "Persona_id",
+  as: "Responsable",
+});
+
+Venta.hasMany(DetalleVenta, {
+  foreignKey: "Venta_id",
+  as: "DetalleVentas",
+});
 
 export default Venta;

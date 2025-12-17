@@ -1,9 +1,13 @@
 // App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// Páginas públicas
 import SelectRole from "./pages/SelectRole";
 import Login from "./pages/Login";
-import Dashboard from "./pages/dashboard";
 import ResetPassword from "./pages/ResetPassword";
+
+// Dashboard
+import Dashboard from "./pages/dashboard";
 
 // Productos
 import RegistroProducto from "./pages/RegistroProducto";
@@ -27,38 +31,47 @@ import GestionTipoDoc from "./pages/GestionTipoDoc";
 
 // Perfil
 import MyProfile from "./pages/MyProfile";
+
+// 🔥 AuthWatcher
 import AuthWatcher from "./pages/AuthWatcher";
 
-// 🟢 Ventas
+// Ventas
 import VentasHome from "./pages/VentasHome";
 import RegistroVenta from "./pages/RegistroVentas";
 import RegistroDetalleVenta from "./pages/RegistroDetalleVenta";
 
-// 🟣 Devoluciones
+// Devoluciones
 import DevolucionesHome from "./pages/DevolucionesHome";
 import RegistroDevolucion from "./pages/RegistroDevolucion";
 import RegistroTipoDevolucion from "./pages/RegistroTipoDevolucion";
 
-// 📊 Reportes (nuevo)
+// Reportes
 import Reportes from "./pages/Reportes";
 
-// 📦 Stock (nuevo) 
+// Stock
 import Stock from "./pages/Stock";
+
+// Historial
+import Historial from "./pages/Historial";
+
+// Facturas
+import Facturas from "./pages/Facturas";
 
 export default function App() {
   return (
     <Router>
-      <AuthWatcher timeoutInMinutes={45} />
+      {/* 👇 Ahora SÍ: dentro del Router, fuera de Routes */}
+      <AuthWatcher />
 
       <Routes>
         {/* Rutas públicas */}
         <Route path="/" element={<SelectRole />} />
         <Route path="/select-role" element={<SelectRole />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* Rutas privadas */}
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* Productos */}
         <Route path="/registro-productos" element={<RegistroProducto />} />
@@ -83,28 +96,28 @@ export default function App() {
         {/* Perfil */}
         <Route path="/my-profile" element={<MyProfile />} />
 
-        {/* 🟢 Ventas */}
+        {/* Ventas */}
         <Route path="/ventas" element={<VentasHome />} />
         <Route path="/registro-venta" element={<RegistroVenta />} />
         <Route path="/registro-detalle-venta" element={<RegistroDetalleVenta />} />
 
-        {/* 🟣 Devoluciones */}
+        {/* Devoluciones */}
         <Route path="/devoluciones" element={<DevolucionesHome />} />
         <Route path="/registro-devolucion" element={<RegistroDevolucion />} />
         <Route path="/registro-tipo-devolucion" element={<RegistroTipoDevolucion />} />
 
-        {/* 📊 Reportes */}
+        {/* Reportes */}
         <Route path="/reportes" element={<Reportes />} />
 
-        {/* 📦 Stock */}
+        {/* Stock */}
         <Route path="/stock" element={<Stock />} />
 
+        {/* Historial */}
+        <Route path="/historial" element={<Historial />} />
 
-
+        {/* Facturas */}
+        <Route path="/facturas" element={<Facturas />} />
       </Routes>
     </Router>
   );
-};
-
-
-
+}

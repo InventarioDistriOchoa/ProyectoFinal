@@ -156,8 +156,58 @@ export default function RegistroProducto() {
         setCategoria("");
         setPrecio("");
       } else if (res.status === 409) {
-        Swal.fire("Error", "El producto que intentas registrar ya existe", "warning");
-      } else {
+
+  // Si el backend indica que el producto está desactivado
+  if (data.desactivado && data.idProducto) {
+
+    Swal.fire({
+      title: "Producto ya existe",
+      html: `
+        El producto <strong>${nombre}</strong> existe pero está <strong>desactivado</strong>.<br><br>
+        ¿Deseas reactivarlo?
+      `,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Sí, reactivar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#198754",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const resAct = await fetch(`http://localhost:3001/api/producto/producto/activar/${data.idProducto}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          const dataAct = await resAct.json();
+
+          if (resAct.ok) {
+            Swal.fire({
+              title: "¡Producto reactivado!",
+              icon: "success",
+              confirmButtonColor: "#198754",
+            });
+          } else {
+            Swal.fire("Error", dataAct.message || "No se pudo reactivar el producto", "error");
+          }
+
+        } catch (error) {
+          console.error(error);
+          Swal.fire("Error", "Hubo un problema al reactivar el producto", "error");
+        }
+      }
+    });
+
+  } else {
+    // Producto existe y está ACTIVO
+    Swal.fire("Error", "El producto que intentas registrar ya existe", "warning");
+  }
+
+}
+ else {
         Swal.fire("Error", data.message || "No se pudo registrar el producto", "error");
       }
     } catch (err) {

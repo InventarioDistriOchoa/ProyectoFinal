@@ -27,7 +27,7 @@ export const login = async (req, res) => {
     const token = jwt.sign(
       { id: persona.idPersona, userRol: persona.Rol_id }, // usa userRol para que coincida con verifyToken
       process.env.JWK_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "4h" }
     );
 
     res.status(200).json({

@@ -1,202 +1,172 @@
 import DetalleVenta from "../models/detalleVenta.model.js";
 import Venta from "../models/venta.model.js";
-import Producto from "../models/producto.model.js"; // Para validar y actualizar stock
+import Producto from "../models/producto.model.js";
+import { registrarAuditoria } from "../utils/registrarAuditoria.js";
 
-// ──────────────────────────────────────────────
-// Función auxiliar: recalcular total de la venta
 async function actualizarTotalVenta(Venta_id) {
   const total = await DetalleVenta.sum("Subtotal", { where: { Venta_id } });
   await Venta.update({ Total: total || 0 }, { where: { idVenta: Venta_id } });
 }
 
-// ──────────────────────────────────────────────
-// Crear detalle de venta
+// =============================================
+//   CREAR DETALLE (CREATE)
+// =============================================
 export const createDetalleVenta = async (req, res) => {
   try {
     const { Cantidad, PrecioUnitario, Subtotal, Venta_id, Producto_id } = req.body;
 
-    // 1️⃣ Validar cantidad
-    const cantidadSolicitada = Number(Cantidad);
-    if (isNaN(cantidadSolicitada) || cantidadSolicitada <= 0) {
-      return res.status(400).json({
-        ok: false,
-        status: 400,
-        Message: "La cantidad debe ser un número mayor que cero",
-      });
-    }
-
-    // 2️⃣ Verificar producto
     const producto = await Producto.findByPk(Producto_id);
-    if (!producto) {
-      return res.status(404).json({
-        ok: false,
-        status: 404,
-        Message: "Producto no encontrado",
-      });
-    }
+    if (!producto)
+      return res.status(404).json({ Message: "Producto no encontrado" });
 
-    // 3️⃣ Validar stock (usa el nombre real del campo de stock)
-    if (producto.Cantidad_Actual < cantidadSolicitada) {
+    if (producto.Cantidad_Actual < Cantidad)
       return res.status(400).json({
-        ok: false,
-        status: 400,
-        Message: `Stock insuficiente. Cantidad disponible: ${producto.Cantidad_Actual}`,
+        Message: `Stock insuficiente. Disponible: ${producto.Cantidad_Actual}`,
       });
-    }
 
-    // 4️⃣ Crear el detalle de venta
     const detalle = await DetalleVenta.create({
-      Cantidad: cantidadSolicitada,
+      Cantidad,
       PrecioUnitario,
       Subtotal,
       Venta_id,
       Producto_id,
     });
 
-    // 5️⃣ Descontar stock
     await producto.update({
-      Cantidad_Actual: producto.Cantidad_Actual - cantidadSolicitada,
+      Cantidad_Actual: producto.Cantidad_Actual - Cantidad,
     });
 
-    // 6️⃣ Actualizar total de la venta
     await actualizarTotalVenta(Venta_id);
+
+    await registrarAuditoria({
+      usuario: req.userId,
+      accion: "CREATE",
+      coleccion: "DetalleVenta",
+      documentoId: detalle.idDetalleVenta,
+      datosAnteriores: null,
+      datosNuevos: detalle.toJSON(),
+      ip: req.ip,
+    });
 
     return res.status(201).json({
       ok: true,
-      status: 201,
-      Message: "Detalle de venta creado y stock actualizado",
+      Message: "Detalle creado",
       body: detalle,
     });
+
   } catch (error) {
-    return res.status(500).json({
-      ok: false,
-      status: 500,
-      Message: "Error al crear detalle de venta",
-      error: error.message,
-    });
+    res.status(500).json({ Message: "Error al crear detalle", error: error.message });
   }
 };
 
-// ──────────────────────────────────────────────
-// Listar todos los detalles
+
+// =============================================
+//   MOSTRAR TODOS
+// =============================================
 export const showDetalleVenta = async (req, res) => {
   try {
     const detalles = await DetalleVenta.findAll();
-    res.status(200).json({
-      ok: true,
-      status: 200,
-      Message: "Listado de detalles de venta",
-      body: detalles,
-    });
+    res.json({ ok: true, body: detalles });
+
   } catch (error) {
-    res.status(500).json({
-      ok: false,
-      status: 500,
-      Message: "Error al obtener detalles de venta",
-      error: error.message,
-    });
+    res.status(500).json({ Message: "Error al obtener detalles" });
   }
 };
 
-// ──────────────────────────────────────────────
-// Mostrar detalle por ID
+
+// =============================================
+//   MOSTRAR POR ID
+// =============================================
 export const showIdDetalleVenta = async (req, res) => {
   try {
     const { id } = req.params;
-    const detalle = await DetalleVenta.findOne({ where: { idDetalleVenta: id } });
+    const detalle = await DetalleVenta.findByPk(id);
 
-    if (!detalle) {
-      return res.status(404).json({
-        ok: false,
-        status: 404,
-        Message: "Detalle de venta no encontrado",
-      });
-    }
+    if (!detalle)
+      return res.status(404).json({ Message: "Detalle no encontrado" });
 
-    res.status(200).json({
-      ok: true,
-      status: 200,
-      Message: "Detalle de venta encontrado",
-      body: detalle,
-    });
+    res.json({ ok: true, body: detalle });
+
   } catch (error) {
-    res.status(500).json({
-      ok: false,
-      status: 500,
-      Message: "Error al obtener detalle de venta",
-      error: error.message,
-    });
+    res.status(500).json({ Message: "Error al obtener detalle" });
   }
 };
 
-// ──────────────────────────────────────────────
-// Actualizar detalle de venta
+
+// =============================================
+//   ACTUALIZAR DETALLE (UPDATE)
+// =============================================
 export const updateDetalleVenta = async (req, res) => {
   try {
     const { id } = req.params;
     const detalle = await DetalleVenta.findByPk(id);
 
-    if (!detalle) {
-      return res.status(404).json({
-        ok: false,
-        status: 404,
-        Message: "Detalle de venta no encontrado",
-      });
-    }
+    if (!detalle)
+      return res.status(404).json({ Message: "Detalle no encontrado" });
+
+    const datosAnteriores = detalle.toJSON();
 
     await detalle.update(req.body);
 
-    // Recalcular total de la venta
+    const datosNuevos = detalle.toJSON();
+
     await actualizarTotalVenta(detalle.Venta_id);
 
-    res.status(200).json({
+    await registrarAuditoria({
+      usuario: req.userId,
+      accion: "UPDATE",
+      coleccion: "DetalleVenta",
+      documentoId: id,
+      datosAnteriores,
+      datosNuevos,
+      ip: req.ip,
+    });
+
+    res.json({
       ok: true,
-      status: 200,
-      Message: "Detalle de venta actualizado",
+      Message: "Detalle actualizado",
       body: detalle,
     });
+
   } catch (error) {
-    res.status(500).json({
-      ok: false,
-      status: 500,
-      Message: "Error al actualizar detalle de venta",
-      error: error.message,
-    });
+    res.status(500).json({ Message: "Error al actualizar detalle" });
   }
 };
 
-// ──────────────────────────────────────────────
-// Eliminar detalle de venta
+
+// =============================================
+//   ELIMINAR DETALLE (DELETE)
+// =============================================
 export const deleteDetalleVenta = async (req, res) => {
   try {
     const { id } = req.params;
     const detalle = await DetalleVenta.findByPk(id);
 
-    if (!detalle) {
-      return res.status(404).json({
-        ok: false,
-        status: 404,
-        Message: "Detalle de venta no encontrado",
-      });
-    }
+    if (!detalle)
+      return res.status(404).json({ Message: "Detalle no encontrado" });
 
-    const ventaId = detalle.Venta_id;
+    const datosAnteriores = detalle.toJSON();
+
     await detalle.destroy();
 
-    // Recalcular total después de eliminar
-    await actualizarTotalVenta(ventaId);
+    await actualizarTotalVenta(detalle.Venta_id);
 
-    res.status(200).json({
+    await registrarAuditoria({
+      usuario: req.userId,
+      accion: "DELETE",
+      coleccion: "DetalleVenta",
+      documentoId: id,
+      datosAnteriores,
+      datosNuevos: null,
+      ip: req.ip,
+    });
+
+    res.json({
       ok: true,
-      status: 200,
-      Message: "Detalle de venta eliminado",
+      Message: "Detalle eliminado",
     });
+
   } catch (error) {
-    res.status(500).json({
-      ok: false,
-      status: 500,
-      Message: "Error al eliminar detalle de venta",
-      error: error.message,
-    });
+    res.status(500).json({ Message: "Error al eliminar detalle" });
   }
 };

@@ -1,3 +1,4 @@
+// routes/tipoDocumento.router.js
 import { Router } from "express";
 import {
   createTipoDocumento,
@@ -5,6 +6,7 @@ import {
   showIdTipoDocumento,
   updateTipoDocumento,
   deleteTipoDocumento,
+  activarTipoDocumento,
 } from "../controllers/tipoDocumento.controller.js";
 
 import validate from "../middlewares/validate.middleware.js";
@@ -19,6 +21,8 @@ const router = Router();
 // ============================
 // CREAR TIPO DOCUMENTO
 // ============================
+// 1er tipoDocumento: sin token
+// Resto: requiere token y rol (Admin / SuperAdmin)
 router.post("/tipoDocumento", async (req, res, next) => {
   try {
     const count = await TipoDocumento.count();
@@ -42,9 +46,11 @@ router.post("/tipoDocumento", async (req, res, next) => {
     }
 
     token = token.split(" ")[1];
+
     const decoded = jwt.verify(token, process.env.JWK_SECRET);
 
-    // Solo Admin y SuperAdmin pueden crear tipos de documento
+    // OJO: aquí asumes que userRol viene en el token con IDs
+    // 1 = Admin, 3 = SuperAdmin (como lo tengas)
     if (decoded.userRol !== 1 && decoded.userRol !== 3) {
       return res.status(403).json({
         ok: false,
@@ -55,7 +61,6 @@ router.post("/tipoDocumento", async (req, res, next) => {
 
     await schema.createTipoDocumento.validateAsync(req.body);
     return createTipoDocumento(req, res);
-
   } catch (error) {
     console.error("Error en POST /tipoDocumento:", error);
     if (error.name === "JsonWebTokenError") {
@@ -76,7 +81,26 @@ router.get("/tipoDocumento", verifyToken, showTipoDocumento);
 router.get("/tipoDocumento/:id", verifyToken, showIdTipoDocumento);
 
 // Actualizar y eliminar → solo Admin y SuperAdmin
-router.put("/tipoDocumento/:id", verifyToken, checkRole(["Admin", "SuperAdmin"]), updateTipoDocumento);
-router.delete("/tipoDocumento/:id", verifyToken, checkRole(["Admin", "SuperAdmin"]), deleteTipoDocumento);
+router.put(
+  "/tipoDocumento/:id",
+  verifyToken,
+  checkRole(["Admin", "SuperAdmin"]),
+  updateTipoDocumento
+);
+
+router.delete(
+  "/tipoDocumento/:id",
+  verifyToken,
+  checkRole(["Admin", "SuperAdmin"]),
+  deleteTipoDocumento
+);
+
+// ✅ Activar nuevamente un tipo de documento desactivado
+router.put(
+  "/tipoDocumento/activar/:id",
+  verifyToken,
+  checkRole(["Admin", "SuperAdmin"]),
+  activarTipoDocumento
+);
 
 export default router;

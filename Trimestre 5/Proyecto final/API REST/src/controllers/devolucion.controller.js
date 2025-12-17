@@ -2,11 +2,12 @@
 import Devolucion from "../models/devolucion.model.js";
 import Producto from "../models/producto.model.js";
 import TipoDevolucion from "../models/tipoDevolucion.model.js";
+import { registrarAuditoria } from "../utils/registrarAuditoria.js";
 
 // ================== Crear devolución ==================
 export const createDevolucion = async (req, res) => {
   try {
-    // 1️⃣ Crear registro de la devolución
+    // 1️⃣ Crear registro de la devolución (por defecto Estado = true)
     const devolucion = await Devolucion.create(req.body);
 
     // 2️⃣ Ajustar inventario SOLO si la devolución es al proveedor
@@ -20,10 +21,8 @@ export const createDevolucion = async (req, res) => {
         const nuevaCantidad = producto.Cantidad_Actual - cantidadDevuelta;
 
         if (nuevaCantidad <= 0) {
-          // 🔴 Eliminar el producto si queda sin stock
           await Producto.destroy({ where: { idProducto: producto.idProducto } });
         } else {
-          // 🟢 Solo actualizar la cantidad
           await Producto.update(
             { Cantidad_Actual: nuevaCantidad },
             { where: { idProducto: producto.idProducto } }
@@ -32,7 +31,18 @@ export const createDevolucion = async (req, res) => {
       }
     }
 
-    // 3️⃣ Respuesta al cliente
+    // 3️⃣ Auditoría CREATE
+    await registrarAuditoria({
+      usuario: req.userId,
+      coleccion: "Devolucion",
+      documentoId: devolucion.idDevolucion,
+      accion: "CREATE",
+      datosAnteriores: null,
+      datosNuevos: devolucion.toJSON(),
+      ip: req.ip,
+    });
+
+    // 4️⃣ Respuesta al cliente
     res.status(201).json({
       ok: true,
       status: 201,
@@ -50,10 +60,13 @@ export const createDevolucion = async (req, res) => {
   }
 };
 
-// Mostrar todas
+// ================== Mostrar todas (solo activas) ==================
 export const showDevolucion = async (req, res) => {
   try {
-    const devoluciones = await Devolucion.findAll();
+    const devoluciones = await Devolucion.findAll({
+      where: { Estado: true },
+    });
+
     res.status(200).json({
       ok: true,
       status: 200,
@@ -70,11 +83,13 @@ export const showDevolucion = async (req, res) => {
   }
 };
 
-// Mostrar por ID
+// ================== Mostrar por ID ==================
 export const showIdDevolucion = async (req, res) => {
   try {
     const { id } = req.params;
-    const devolucion = await Devolucion.findOne({ where: { idDevolucion: id } });
+    const devolucion = await Devolucion.findOne({
+      where: { idDevolucion: id },
+    });
 
     if (!devolucion) {
       return res.status(404).json({
@@ -100,19 +115,41 @@ export const showIdDevolucion = async (req, res) => {
   }
 };
 
-// Actualizar devolución
+// ================== Actualizar devolución ==================
 export const updateDevolucion = async (req, res) => {
   try {
     const { id } = req.params;
-    const updated = await Devolucion.update(req.body, {
-      where: { idDevolucion: id },
+
+    const devolucion = await Devolucion.findByPk(id);
+    if (!devolucion) {
+      return res.status(404).json({
+        ok: false,
+        status: 404,
+        Message: "Devolución no encontrada",
+      });
+    }
+
+    const datosAnteriores = { ...devolucion.dataValues };
+
+    await devolucion.update(req.body);
+
+    const datosNuevos = { ...devolucion.dataValues };
+
+    await registrarAuditoria({
+      usuario: req.userId,
+      accion: "UPDATE",
+      coleccion: "Devolucion",
+      documentoId: id,
+      datosAnteriores,
+      datosNuevos,
+      ip: req.ip,
     });
 
     res.status(200).json({
       ok: true,
       status: 200,
       Message: "Devolución actualizada",
-      body: updated,
+      body: devolucion,
     });
   } catch (error) {
     res.status(500).json({
@@ -124,22 +161,90 @@ export const updateDevolucion = async (req, res) => {
   }
 };
 
-// Eliminar devolución
+// ================== Desactivar devolución (soft delete) ==================
 export const deleteDevolucion = async (req, res) => {
   try {
     const { id } = req.params;
-    await Devolucion.destroy({ where: { idDevolucion: id } });
+
+    const devolucion = await Devolucion.findByPk(id);
+    if (!devolucion) {
+      return res.status(404).json({
+        ok: false,
+        status: 404,
+        Message: "Devolución no encontrada",
+      });
+    }
+
+    const datosAnteriores = devolucion.toJSON();
+
+    await devolucion.update({ Estado: false });
+
+    await registrarAuditoria({
+      usuario: req.userId,
+      accion: "DELETE",
+      coleccion: "Devolucion",
+      documentoId: id,
+      datosAnteriores,
+      datosNuevos: { Estado: false },
+      ip: req.ip,
+    });
 
     res.status(200).json({
       ok: true,
       status: 200,
-      Message: "Devolución eliminada",
+      Message: "Devolución desactivada",
     });
   } catch (error) {
     res.status(500).json({
       ok: false,
       status: 500,
-      Message: "Error al eliminar devolución",
+      Message: "Error al desactivar devolución",
+      error: error.message,
+    });
+  }
+};
+
+// ================== Activar devolución ==================
+export const activarDevolucion = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const devolucion = await Devolucion.findByPk(id);
+    if (!devolucion) {
+      return res.status(404).json({
+        ok: false,
+        status: 404,
+        Message: "Devolución no encontrada",
+      });
+    }
+
+    const datosAnteriores = { ...devolucion.dataValues };
+
+    await devolucion.update({ Estado: true });
+
+    const datosNuevos = { ...devolucion.dataValues };
+
+    await registrarAuditoria({
+      usuario: req.userId,
+      accion: "ACTIVATE",
+      coleccion: "Devolucion",
+      documentoId: id,
+      datosAnteriores,
+      datosNuevos,
+      ip: req.ip,
+    });
+
+    res.status(200).json({
+      ok: true,
+      status: 200,
+      Message: "Devolución reactivada",
+      body: devolucion,
+    });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      status: 500,
+      Message: "Error al activar devolución",
       error: error.message,
     });
   }

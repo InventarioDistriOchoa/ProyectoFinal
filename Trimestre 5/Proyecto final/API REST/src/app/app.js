@@ -23,10 +23,11 @@ import tipoDevolucionRouter from "../routers/tipoDevolucion.router.js";
 import devolucionRouter from "../routers/devolucion.router.js";
 import stockRouter from "../routers/stock.routers.js";
 import reportesRouter from "../routers/reportes.router.js";
-
-// Middlewares
+import auditoriaRoutes from "../routers/auditoria.routes.js";
+import facturaRoutes from "../routers/factura.router.js";
 import authMiddleware from "../middlewares/auth.middleware.js";
-
+import Auditoria from "../models/auditoria.model.js";
+import Persona from "../models/persona.model.js";
 // Configuración inicial
 dotenv.config(); // Carga las variables de entorno
 
@@ -81,7 +82,8 @@ app.use("/api/tipoDevolucion", authMiddleware, tipoDevolucionRouter);
 app.use("/api/devolucion", authMiddleware, devolucionRouter);
 app.use("/api/stock", stockRouter);
 app.use("/api/reportes", authMiddleware, reportesRouter);
-
+app.use("/api/historial", auditoriaRoutes);
+app.use("/api", facturaRoutes);
 // Manejo de errores
 app.use((req, res) => {
   res.status(404).json({ ok: false, message: "Ruta no encontrada" });
@@ -92,6 +94,16 @@ app.use((err, req, res, next) => {
   res
     .status(500)
     .json({ ok: false, message: "Error en el servidor", error: err.message });
+});
+// RELACIONES sin ciclo de imports
+Auditoria.belongsTo(Persona, {
+  foreignKey: "usuario",
+  as: "persona"
+});
+
+Persona.hasMany(Auditoria, {
+  foreignKey: "usuario",
+  as: "auditorias"
 });
 
 export default app;

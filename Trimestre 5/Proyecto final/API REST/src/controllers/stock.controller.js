@@ -13,8 +13,8 @@ export const getStock = async (req, res) => {
       include: [
         {
           model: Categoria,
-          as: "Categoria",                  // 👈 usa el alias correcto de la relación
-          attributes: ["Nombre_Categoria"], // solo este campo
+          as: "categoria",                 // 👈 alias correcto (minúscula)
+          attributes: ["Nombre_Categoria"],
         },
       ],
       order: [["Nombre", "ASC"]],
@@ -25,6 +25,7 @@ export const getStock = async (req, res) => {
       productos.map(async (p) => {
         const entradas =
           (await Entrada.sum("Cantidad", { where: { Producto_id: p.idProducto } })) || 0;
+
         const salidas =
           (await DetalleVenta.sum("Cantidad", { where: { Producto_id: p.idProducto } })) || 0;
 
@@ -35,7 +36,7 @@ export const getStock = async (req, res) => {
             include: [
               {
                 model: TipoDevolucion,
-                as: "TipoDevolucion",
+                as: "TipoDevolucion",       // aquí tu asociación no tenía alias, así que por nombre de modelo está bien
                 where: { NombreTipo: "proveedor" },
               },
             ],
@@ -53,7 +54,7 @@ export const getStock = async (req, res) => {
             ],
           })) || 0;
 
-        // Estado del stock
+        // Estado del stock (semáforo)
         let estado = "verde";
         if (p.Cantidad_Actual <= 0) estado = "rojo";
         else if (p.Cantidad_Actual <= 5) estado = "amarillo";
@@ -61,7 +62,8 @@ export const getStock = async (req, res) => {
         return {
           id: p.idProducto,
           producto: p.Nombre,
-          categoria: p.Categoria?.Nombre_Categoria || "Sin categoría", // 👈 categoría lista
+          // 👇 ojo: ahora es p.categoria (minúscula, por el alias)
+          categoria: p.categoria?.Nombre_Categoria || "Sin categoría",
           estado,
           disponible: p.Cantidad_Actual,
           entradas,
@@ -72,11 +74,13 @@ export const getStock = async (req, res) => {
       })
     );
 
-    res.json({ body: stockData });
+    res.json({ ok: true, body: stockData });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ ok: false, message: "Error al traer stock", error: error.message });
+    res.status(500).json({
+      ok: false,
+      message: "Error al traer stock",
+      error: error.message,
+    });
   }
 };

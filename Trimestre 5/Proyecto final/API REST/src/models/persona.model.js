@@ -49,14 +49,11 @@ Persona.init(
       },
     },
 
-    // ➜ NUEVO CAMPO PARA LA FOTO
- Foto: {
-  type: DataTypes.STRING,
-  allowNull: true
-}
-,
+    Foto: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
 
-    // ➜ Campos de recuperación de contraseña
     resetToken: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -73,5 +70,16 @@ Persona.init(
     timestamps: false,
   }
 );
+
+/* 🔥 ASOCIACIONES (muy útil para las auditorías y consultas) */
+Persona.belongsTo(TipoDocumento, {
+  foreignKey: "Tipo_Documento_id",
+  as: "TipoDocumento"
+});
+
+Persona.belongsTo(Rol, {
+  foreignKey: "Rol_id",
+  as: "Rol"
+});
 
 export default Persona;
