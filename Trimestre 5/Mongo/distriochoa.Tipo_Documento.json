@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "689eccfe0749f4c4bbeec4a9"
+  },
+  "idTipo_Documento": 1,
+  "descripcion": "Cédula de Ciudadanía"
+},
+{
+  "_id": {
+    "$oid": "689eccfe0749f4c4bbeec4aa"
+  },
+  "idTipo_Documento": 2,
+  "descripcion": "Tarjeta de Identidad"
+},
+{
+  "_id": {
+    "$oid": "689eccfe0749f4c4bbeec4ab"
+  },
+  "idTipo_Documento": 3,
+  "descripcion": "Cédula de Extranjería"
+}]
