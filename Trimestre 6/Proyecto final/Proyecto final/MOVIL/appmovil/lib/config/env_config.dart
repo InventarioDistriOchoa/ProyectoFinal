@@ -26,6 +26,16 @@ class EnvConfig {
 
 
   //para datos movil
-  static const String baseUrl = 'http://172.20.10.2:3001/api';
-  static const String mediaBaseUrl = 'http://172.20.10.2:3001';
+  //static const String baseUrl = 'http://172.20.10.2:3001/api';
+  //static const String mediaBaseUrl = 'http://172.20.10.2:3001';
+
+
+  // lib/config/env_config.dart
+
+  static const String baseUrl =
+      'https://proyectofinal-production-ffdd.up.railway.app/api';
+
+  static const String mediaBaseUrl =
+      'https://proyectofinal-production-ffdd.up.railway.app';
+
 }

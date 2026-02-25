@@ -10,13 +10,13 @@ dotenv.config();
 modelsApp(true); // true = sincroniza y crea tablas si no existen
 
 // Puerto del servidor
-const port = process.env.SERVER_PORT || 3001;
+const port = process.env.PORT || process.env.SERVER_PORT || 3001;
 
 // Levantar servidor
 app.listen(port, '0.0.0.0', () => {
   console.log("EMAIL_USER:", process.env.EMAIL_USER);
   console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "OK" : "NO");
 
-  console.log(`✅ Servidor corriendo en http://192.168.1.5:${port}`);
+ console.log(`✅ Servidor corriendo en puerto ${port}`);
 });
 

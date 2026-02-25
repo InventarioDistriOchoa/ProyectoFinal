@@ -1,4 +1,12 @@
-# Backups grandes
-*.zip
-Trimestre 6/Proyecto final.zip
-Trimestre 4/INVENTARIO12/INVENTARIO12/
+# Node
+node_modules/
+npm-debug.log*
+
+# Flutter / Dart
+.dart_tool/
+build/
+**/build/
+
+# Env
+.env
+.env.*

@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import { Sequelize } from "sequelize";
 
 // Cargar variables de entorno
-dotenv.config({ path: ".env" });
+dotenv.config();
 
 // Configuración de la conexión
 const sequelize = new Sequelize(
@@ -11,6 +11,7 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT, // 👈 IMPORTANTE
     dialect: process.env.DB_DIALECT,
     logging: false,
   }
